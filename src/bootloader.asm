@@ -1,5 +1,6 @@
 bits 32           ; nasm directive - 32 bit
 
+extern kernel_main
 global start
 
 MODULEALIGN       equ     1<<0
@@ -31,4 +32,7 @@ start:
     mov word [0xb8014], 0x026c ; l
     mov word [0xb8016], 0x0264 ; d
     mov word [0xb8018], 0x0221 ; !
+
+    call kernel_main
+
     hlt

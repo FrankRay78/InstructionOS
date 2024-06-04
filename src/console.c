@@ -9,6 +9,18 @@ char attribute = (char)WHITE_ON_BLUE;
 int offset = 0;
 
 
+void clear()
+{
+	offset = 0;
+
+	for (int i = 0; i < MAX_WIDTH * MAX_HEIGHT; i++)
+	{
+		printchar(' ');
+	}
+
+	offset = 0;
+}
+
 void printline(char* s)
 {
 	printstring(s);

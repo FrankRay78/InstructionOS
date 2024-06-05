@@ -30,28 +30,9 @@ src/kernel.bin: $(ASM_OBJ) $(OBJ)
 	$(CC) -c $< -o $@ $(CC_FLAGS)
 
 
-
-# Make implicit variables for unit testing
-HEADERS   = $(wildcard test/*.h)
-C_SOURCES = $(wildcard test/*.c)
-OBJ=${C_SOURCES:.c=.o}
-
-CC_FLAGS= 
-CC=cc
-
-
-test: test/main
-	./test/main
-
-test/main: $(OBJ)
-	cc -o test/main $(OBJ)
-
-
 clean:
 	rm -fd src/*.o
 	rm -fd src/*.bin
-	rm -fd test/*.o
-	rm -fd test/main
 
 
-.PHONY: run build test clean
+.PHONY: clean

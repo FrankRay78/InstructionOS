@@ -11,7 +11,7 @@ ASM_OBJ =${ASM_SOURCES:.s=.o}
 CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc
 CC=i686-elf-gcc
 
-LD_FLAGS = -ffreestanding -O2 -nostdlib -lgcc
+LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc
 LD=i686-elf-gcc
 
 

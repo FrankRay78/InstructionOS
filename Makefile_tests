@@ -6,10 +6,10 @@ OBJ=${C_SOURCES:.c=.o}
 
 
 CC_FLAGS= 
-CC=cc
+CC=gcc
 
-LD_FLAGS = 
-LD=cc
+LD_FLAGS= 
+LD=gcc
 
 
 test: test/main

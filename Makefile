@@ -1,6 +1,5 @@
 
-# Set make implicit variables
-
+# Make implicit variables for compilation
 HEADERS   = $(wildcard src/*.h)
 C_SOURCES = $(wildcard src/*.c)
 OBJ=${C_SOURCES:.c=.o}
@@ -14,7 +13,6 @@ CC=i686-elf-gcc
 
 LD_FLAGS = -ffreestanding -O2 -nostdlib -lgcc
 LD=i686-elf-gcc
-
 
 
 run: build
@@ -33,10 +31,27 @@ src/kernel.bin: $(ASM_OBJ) $(OBJ)
 
 
 
+# Make implicit variables for unit testing
+HEADERS   = $(wildcard test/*.h)
+C_SOURCES = $(wildcard test/*.c)
+OBJ=${C_SOURCES:.c=.o}
+
+CC_FLAGS= 
+CC=cc
+
+
+test: test/main
+	./test/main
+
+test/main: $(OBJ)
+	cc -o test/main $(OBJ)
+
+
 clean:
 	rm -fd src/*.o
 	rm -fd src/*.bin
 	rm -fd test/*.o
+	rm -fd test/main
 
 
-.PHONY: run build clean
+.PHONY: run build test clean

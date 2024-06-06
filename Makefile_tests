@@ -5,15 +5,17 @@ C_SOURCES = $(wildcard src/*.c test/*.c)
 OBJ=${C_SOURCES:.c=.o}
 
 
-CC_FLAGS= 
+CC_FLAGS= -std=c99
 CC=gcc
 
 LD_FLAGS= 
 LD=gcc
 
 
-test: test/main
+test: build
 	./test/main
+
+build: test/main
 
 test/main: $(OBJ)
 	$(LD) -o test/main $(OBJ) $(LD_FLAGS)

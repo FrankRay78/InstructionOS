@@ -1,7 +1,8 @@
 #pragma once
 
 #include "munit.h"
+#include "../src/console.h"
 
 extern MunitTest console_tests[];
 
-MunitResult my_test(const MunitParameter params[], void* user_data_or_fixture);
+MunitResult console_should_printchar_test(const MunitParameter params[], void* user_data_or_fixture);

@@ -10,6 +10,9 @@
 #define MAX_HEIGHT 25
 
 
+extern unsigned char* framebuffer;
+
+
 // Blanks the screen by writing the ASCII space character to each character cell
 void clear();
 

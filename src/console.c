@@ -2,7 +2,8 @@
 
 
 //Create a byte pointer to the start of video memory
-unsigned char* framebuffer = (unsigned char*)VIDEO_ADDRESS;
+//unsigned char* framebuffer = (unsigned char*)VIDEO_ADDRESS;
+unsigned char* framebuffer;
 
 char attribute = (char)WHITE_ON_BLUE;
 

@@ -8,10 +8,10 @@ ASM_SOURCES = $(wildcard src/*.s)
 ASM_OBJ =${ASM_SOURCES:.s=.o}
 
 
-CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g
+CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g -Wno-unused-parameter
 CC=i686-elf-gcc
 
-LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g
+LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g -Wno-unused-parameter
 LD=i686-elf-gcc
 
 

@@ -18,21 +18,7 @@ asmlinkage int kernel_main()
 
     console_clear();
     
-    console_printstring("Hello World!");
-
-
-    /*
-    //Ascii art courtesy of https://www.asciiart.eu/text-to-ascii-art
-    //Doom font, width 80
-
-    console_printline("                                                                         ");
-    console_printline("    _____           _                   _   _             _____ _____    ");
-    console_printline("   |_   _|         | |                 | | (_)           |  _  /  ___|   ");
-    console_printline("     | |  _ __  ___| |_ _ __ _   _  ___| |_ _  ___  _ __ | | | \\ `--.    ");
-    console_printline("     | | | '_ \\/ __| __| '__| | | |/ __| __| |/ _ \\| '_ \\| | | |`--. \\   ");
-    console_printline("    _| |_| | | \\__ \\ |_| |  | |_| | (__| |_| | (_) | | | \\ \\_/ /\\__/ /   ");
-    console_printline("   |_____|_| |_|___/\\__|_|   \\__,_|\\___|\\__|_|\\___/|_| |_|\\___/\\____/    ");
-    */
+    console_printstring("\n InstructionOS");
 
 
     return 0;

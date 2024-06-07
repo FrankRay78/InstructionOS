@@ -5,7 +5,7 @@
 //unsigned char* framebuffer = (unsigned char*)VIDEO_ADDRESS;
 unsigned char* framebuffer;
 
-char attribute = (char)WHITE_ON_BLUE;
+char attribute = (char)CONSOLE_WHITE_ON_BLUE;
 
 int offset = 0;
 
@@ -14,7 +14,7 @@ void clear()
 {
 	offset = 0;
 
-	for (int i = 0; i < MAX_WIDTH * MAX_HEIGHT; i++)
+	for (int i = 0; i < CONSOLE_MAX_WIDTH * CONSOLE_MAX_HEIGHT; i++)
 	{
 		printchar(' ');
 	}

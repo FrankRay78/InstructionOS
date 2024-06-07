@@ -1,14 +1,14 @@
 #pragma once
 
 
-#define VIDEO_ADDRESS 0xb8000
-#define WHITE_ON_BLUE  0x1f
+#define CONSOLE_VIDEO_ADDRESS 0xb8000
+#define CONSOLE_WHITE_ON_BLUE  0x1f
 
 // Assumes VGA text mode 7 (80 x 25)
 // ref: https://en.wikipedia.org/wiki/VGA_text_mode
-#define MAX_WIDTH 80
-#define MAX_HEIGHT 25
-
+#define CONSOLE_MAX_WIDTH 80
+#define CONSOLE_MAX_HEIGHT 25
+#define CONSOLE_BYTES_PER_PIXEL 2
 
 extern unsigned char* framebuffer;
 

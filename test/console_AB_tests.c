@@ -1,4 +1,4 @@
-#include "console_tests.h"
+#include "console_AB_tests.h"
 
 MunitResult console_should_write_AB_test(const MunitParameter params[], void* user_data_or_fixture)
 {
@@ -66,7 +66,7 @@ MunitResult console_should_clear_A_EOL_B_test(const MunitParameter params[], voi
     return MUNIT_OK;
 }
 
-MunitTest console_tests[] = 
+MunitTest console_AB_tests[] = 
 {
     { "/console_should_write_AB_test", console_should_write_AB_test, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
     { "/console_should_clear_AB_test", console_should_clear_AB_test, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },

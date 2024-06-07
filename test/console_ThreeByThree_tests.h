@@ -3,4 +3,4 @@
 #include "munit.h"
 #include "../src/console.h"
 
-extern MunitTest console_tests[];
+extern MunitTest console_ThreeByThree_tests[];

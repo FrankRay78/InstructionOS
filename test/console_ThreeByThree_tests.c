@@ -128,7 +128,7 @@ MunitResult console_should_scroll_three_lines_test(const MunitParameter params[]
     return MUNIT_OK;
 }
 
-MunitResult console_should_scroll_and_blank_last_line(const MunitParameter params[], void* user_data_or_fixture)
+MunitResult console_should_scroll_and_blank_last_line_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
     unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
@@ -161,7 +161,7 @@ MunitTest console_ThreeByThree_tests[] =
     { "/console_should_scroll_one_line_test", console_should_scroll_one_line_test, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
     { "/console_should_scroll_two_lines_test", console_should_scroll_two_lines_test, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
     { "/console_should_scroll_three_lines_test", console_should_scroll_three_lines_test, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
-    { "/console_should_scroll_and_blank_last_line", console_should_scroll_and_blank_last_line, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
+    { "/console_should_scroll_and_blank_last_line_test", console_should_scroll_and_blank_last_line_test, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL },
     /* Mark the end of the array with an empty entry */
     { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };

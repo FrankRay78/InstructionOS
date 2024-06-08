@@ -1,43 +1,32 @@
 #include "console.h"
 
 
-// A byte pointer to the start of video memory
-unsigned char* framebuffer;
-char attribute;
 int width;
 int height;
+char attribute;
 
 // Cursor position
 int column = 0;
 int row = 0;
 
 
-// Write directly to the video memory
-void framebuffer_writechar(char c) 
+void console_initialise(int console_width, int console_height, int console_bytes_per_pixel, unsigned char* console_framebuffer, char console_attribute)
+{
+	width = console_width;
+	height = console_height;
+	attribute = console_attribute;
+
+	framebuffer_initialise(console_framebuffer);
+}
+
+void console_writechar(char c) 
 {
 	// Calculate the positional index required for the linear framebuffer
 	// Each character is represented by two bytes aligned as a 16-bit word
 	// ref: https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement
 
-    framebuffer[row * width * 2 + column * 2] = c;
-    framebuffer[row * width * 2 + column * 2 + 1] = attribute;
-}
-
-void framebuffer_copy(int sourcePosition, int destinationPosition, int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        framebuffer[destinationPosition + i] = framebuffer[sourcePosition + i];
-    }
-}
-
-
-void console_initialise(int console_width, int console_height, int console_bytes_per_pixel, unsigned char* console_framebuffer, char console_attribute)
-{
-	width = console_width;
-	height = console_height;
-	framebuffer = console_framebuffer;
-	attribute = console_attribute;
+    framebuffer_writechar(row * width * 2 + column * 2, c);
+    framebuffer_writechar(row * width * 2 + column * 2 + 1, attribute);
 }
 
 void console_clear()
@@ -82,7 +71,7 @@ void console_printchar(char c)
 	    // Blank the last line ready for writing to
 	    for (int i = 0; i < width; i++)
 	    {
-	        framebuffer_writechar(' ');
+	        console_writechar(' ');
 
 	        // Move the cursor right by one character
 	        column++;
@@ -101,7 +90,7 @@ void console_printchar(char c)
 	    return;
 	}
 
-	framebuffer_writechar(c);
+	console_writechar(c);
 
 	// Move the cursor right by one character
 	column++;

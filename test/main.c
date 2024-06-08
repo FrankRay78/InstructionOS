@@ -1,7 +1,8 @@
 #include "main.h"
 
 
-static MunitSuite console_suites[] = {
+static MunitSuite kernel_suites[] = {
+  { "", framebuffer_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "", console_AB_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "", console_HelloWorld_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "", console_ThreeByThree_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
@@ -9,7 +10,7 @@ static MunitSuite console_suites[] = {
 };
 
 static MunitSuite test_suite = { 
-  "", NULL, console_suites, 1, MUNIT_SUITE_OPTION_NONE
+  "/kernel", NULL, kernel_suites, 1, MUNIT_SUITE_OPTION_NONE
 };
 
 

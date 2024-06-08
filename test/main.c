@@ -1,14 +1,14 @@
 #include "main.h"
 
 
-static const MunitSuite console_suites[] = {
+static MunitSuite console_suites[] = {
   { "/console_AB_tests", console_AB_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/console_HelloWorld_tests", console_HelloWorld_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "/console_ThreeByThree_tests", console_ThreeByThree_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE }
 };
 
-static const MunitSuite test_suite = { 
+static MunitSuite test_suite = { 
   (char*) "/console_tests", NULL, console_suites, 1, MUNIT_SUITE_OPTION_NONE
 };
 

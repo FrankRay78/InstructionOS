@@ -1,42 +1,105 @@
 #include "console.h"
 
 
-//Create a byte pointer to the start of video memory
-unsigned char* framebuffer = (unsigned char*)VIDEO_ADDRESS;
+int width;
+int height;
+char attribute;
 
-char attribute = (char)WHITE_ON_BLUE;
+// Cursor position
+int column = 0;
+int row = 0;
 
-int offset = 0;
 
-
-void clear()
+void console_initialise(int console_width, int console_height, int console_bytes_per_pixel, unsigned char* console_framebuffer, char console_attribute)
 {
-	offset = 0;
+	width = console_width;
+	height = console_height;
+	attribute = console_attribute;
 
-	for (int i = 0; i < MAX_WIDTH * MAX_HEIGHT; i++)
+	framebuffer_initialise(console_framebuffer);
+}
+
+void console_writechar(char c) 
+{
+	// Calculate the positional index required for the linear framebuffer
+	// Each character is represented by two bytes aligned as a 16-bit word
+	// ref: https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement
+
+    framebuffer_writechar(row * width * 2 + column * 2, c);
+    framebuffer_writechar(row * width * 2 + column * 2 + 1, attribute);
+}
+
+void console_clear()
+{
+	// Reset the cursor position
+	column = 0;
+	row = 0;
+
+	for (int i = 0; i < width * height; i++)
 	{
-		printchar(' ');
+		console_printchar(' ');
 	}
 
-	offset = 0;
+	// Reset the cursor position
+	column = 0;
+	row = 0;
 }
 
-void printline(char* s)
+void console_printline(char* s)
 {
-	printstring(s);
-	printchar('\n');
+	console_printstring(s);
+	console_printchar('\n');
 }
 
-void printstring(char* s)
+void console_printstring(char* s)
 {
 	for (int i = 0; s[i] != 0; i++)
 	{
-		printchar(s[i]);
+		console_printchar(s[i]);
 	}
 }
 
-void printchar(char c)
+void console_printchar(char c)
 {
-    framebuffer[offset++]=c;
-    framebuffer[offset++]=attribute;
+	// Scroll if the cursor has dropped off the bottom of the terminal
+	if (row == height)
+	{
+	    framebuffer_copy(width * 2, 0, (height - 1) * width * 2);
+
+	    row--;
+
+	    // Blank the last line ready for writing to
+	    for (int i = 0; i < width; i++)
+	    {
+	        console_writechar(' ');
+
+	        // Move the cursor right by one character
+	        column++;
+	    }
+
+	    // Move the cursor to the beginning of the current line
+	    column = 0;
+	}
+
+	// Perform a CRLF if we encounter a Newline character
+	if (c == '\n')
+	{
+	    column = 0;
+	    row++;
+
+	    return;
+	}
+
+	console_writechar(c);
+
+	// Move the cursor right by one character
+	column++;
+
+	// Perform a CRLF when the cursor reaches the end of the terminal line
+	// eg.column is 0 to 79, width = 80
+	if (column == width)
+	{
+	    column = 0;
+	    row++;
+	}
 }

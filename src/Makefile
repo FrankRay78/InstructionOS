@@ -17,7 +17,7 @@ LD=i686-elf-gcc
 #
 # Build and run the kernel
 #
-run: build
+boot: build
 	qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -monitor stdio
 
 build: kernel.bin

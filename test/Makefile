@@ -14,7 +14,7 @@ LD=gcc
 #
 # Build and run the unit tests
 #
-test: build
+run: build
 	./main
 
 build: main

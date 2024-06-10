@@ -1,38 +1,17 @@
 
-# Make implicit variables for compilation
-HEADERS   = $(wildcard src/*.h)
-C_SOURCES = $(wildcard src/*.c)
-OBJ=${C_SOURCES:.c=.o}
+# Recursive Use of make
+# ref: https://www.gnu.org/software/make/manual/make.html#Recursion
 
-ASM_SOURCES = $(wildcard src/*.s)
-ASM_OBJ =${ASM_SOURCES:.s=.o}
+boot:
+	$(MAKE) -C src
 
-
-CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g -Wno-unused-parameter
-CC=i686-elf-gcc
-
-LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g -Wno-unused-parameter
-LD=i686-elf-gcc
-
-
-run: build
-	qemu-system-i386 -kernel src/kernel.bin -no-reboot -no-shutdown -monitor stdio
-
-build: src/kernel.bin
-
-src/kernel.bin: $(ASM_OBJ) $(OBJ)
-	$(LD) -T src/linkertemplate.ld -o src/kernel.bin $(ASM_OBJ) $(OBJ) $(LD_FLAGS)
-
-%.o: %.s
-	nasm -f elf32 $< -o $@
-
-%.o : %.c ${HEADERS} 
-	$(CC) -c $< -o $@ $(CC_FLAGS)
-
+test:
+	$(MAKE) -C test
 
 clean:
 	rm -fd src/*.o
 	rm -fd src/*.bin
+	rm -fd test/*.o
+	rm -fd test/main
 
-
-.PHONY: clean
+.PHONY: boot test clean

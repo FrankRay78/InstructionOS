@@ -7,7 +7,7 @@ OBJ=${C_SOURCES:.c=.o}
 CC_FLAGS= -std=c99 -Wall -Wextra -g -Wno-unused-parameter
 CC=gcc
 
-LD_FLAGS= -Wall -Wextra -g -Wno-unused-parameter
+LD_FLAGS= -std=c99 -Wall -Wextra -g -Wno-unused-parameter
 LD=gcc
 
 

@@ -2,6 +2,8 @@
 
 A 32-bit, x86 operating system written in C. 
 
+InstructionOS is a hobby operating system written with a particular interest in test-driven development and comprehensive unit test coverage integrated from the beginning, something other kernels severely lack.
+
 ## Features
 
 * Bootloader written in NASM assembly

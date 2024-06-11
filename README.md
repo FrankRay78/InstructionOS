@@ -2,7 +2,7 @@
 
 A 32-bit, x86 operating system written in C. 
 
-InstructionOS is a hobby operating system written with a particular interest in test-driven development and comprehensive unit test coverage integrated from the beginning, something other kernels severely lack.
+InstructionOS is a hobby operating system written with a particular interest in low-level, test-driven development and comprehensive unit test coverage integrated from the beginning, something other kernels severely lack. The kernel code is clean, well-structured and commented to maximise educational value.
 
 ## Features
 
@@ -16,7 +16,7 @@ InstructionOS is a hobby operating system written with a particular interest in 
 
 ## Progress
 
-InstructionOS isn't a fully-fledged 'operating system', but it does boot and is being actively developed. The obligatory screenshot (which is pretty underwhelming at the moment) is here:
+InstructionOS isn't a fully-fledged 'operating system' yet, but it does boot and is being actively developed. The obligatory screenshot (which is pretty underwhelming at the moment) is here:
 
 ![Screenshot from 2024-06-11 11-31-02](https://github.com/FrankRay78/InstructionOS/assets/52075808/025c2eed-c4d0-4208-a3d0-ce08dde13121)
 
@@ -30,7 +30,9 @@ The following tools are required: gcc, nasm, make, QEMU (qemu-system-i386), C cr
 
 `make test` will run the unit tests, having first built the kernel and unit tests using the standard C99 toolchain.
 
-Additional targets are located in the main [Makefile](https://github.com/FrankRay78/InstructionOS/blob/main/Makefile), ideal for development IDE's with integrated Makefile support (eg. JetBrains CLion or Visual Studio Code).
+`make clean` should be run before switching between these two commands, otherwise you'll get a linker failure (given the differing toolchains).
+
+Additional targets exist in the main [Makefile](https://github.com/FrankRay78/InstructionOS/blob/main/Makefile), ideal for development IDE's with integrated Makefile support (eg. JetBrains CLion or Visual Studio Code).
 
 ## License
 

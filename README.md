@@ -14,6 +14,14 @@ A 32-bit, x86 operating system written in C.
 
 ## Progress
 
-Instruction OS isn't a fully-fledged 'operating system', but it does boot and is being actively developed. The obligatory screenshot (which is pretty underwhelming at the moment) is here:
+InstructionOS isn't a fully-fledged 'operating system', but it does boot and is being actively developed. The obligatory screenshot (which is pretty underwhelming at the moment) is here:
 
 ![Screenshot from 2024-06-11 11-31-02](https://github.com/FrankRay78/InstructionOS/assets/52075808/025c2eed-c4d0-4208-a3d0-ce08dde13121)
+
+## License
+
+InstructionOS is free software licensed under the terms of the MIT License, see [LICENSE](https://github.com/FrankRay78/InstructionOS/blob/main/LICENSE) for more details.
+
+## Credits
+
+InstructionOS was created by Frank Ray, [Better Software UK](https://bettersoftware.uk).

@@ -6,8 +6,8 @@ int height;
 char attribute;
 
 // Cursor position
-int column = 0;
-int row = 0;
+int column;
+int row;
 
 
 void console_initialise(int console_width, int console_height, int console_bytes_per_pixel, unsigned char* console_framebuffer, char console_attribute)
@@ -17,6 +17,10 @@ void console_initialise(int console_width, int console_height, int console_bytes
 	attribute = console_attribute;
 
 	framebuffer_initialise(console_framebuffer);
+
+    // Initialise the cursor position
+    column = 0;
+    row = 0;
 }
 
 void console_writechar(char c) 

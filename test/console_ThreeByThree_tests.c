@@ -3,7 +3,7 @@
 MunitResult console_should_write_ABC_DEF_GHI_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
+    unsigned char framebuffer[3 * 3 * 2];
     console_initialise(3, 3, 2, framebuffer, 0x00);
 
     // When
@@ -26,7 +26,7 @@ MunitResult console_should_write_ABC_DEF_GHI_test(const MunitParameter params[],
 MunitResult console_should_clear_ABC_DEF_GHI_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
+    unsigned char framebuffer[3 * 3 * 2];
     console_initialise(3, 3, 2, framebuffer, 0x00);
 
     // When
@@ -50,7 +50,7 @@ MunitResult console_should_clear_ABC_DEF_GHI_test(const MunitParameter params[],
 MunitResult console_should_scroll_one_line_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
+    unsigned char framebuffer[3 * 3 * 2];
     console_initialise(3, 3, 2, framebuffer, 0x00);
 
     // When
@@ -76,7 +76,7 @@ MunitResult console_should_scroll_one_line_test(const MunitParameter params[], v
 MunitResult console_should_scroll_two_lines_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
+    unsigned char framebuffer[3 * 3 * 2];
     console_initialise(3, 3, 2, framebuffer, 0x00);
 
     // When
@@ -103,7 +103,7 @@ MunitResult console_should_scroll_two_lines_test(const MunitParameter params[], 
 MunitResult console_should_scroll_three_lines_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
+    unsigned char framebuffer[3 * 3 * 2];
     console_initialise(3, 3, 2, framebuffer, 0x00);
 
     // When
@@ -131,7 +131,7 @@ MunitResult console_should_scroll_three_lines_test(const MunitParameter params[]
 MunitResult console_should_scroll_and_blank_last_line_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(3 * 3 * 2);
+    unsigned char framebuffer[3 * 3 * 2];
     console_initialise(3, 3, 2, framebuffer, 0x00);
 
     // When

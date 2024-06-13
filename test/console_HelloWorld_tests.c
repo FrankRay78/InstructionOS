@@ -3,7 +3,7 @@
 MunitResult console_should_write_hello_world_with_printstring_statement_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(80 * 25 * 2);
+    unsigned char framebuffer[80 * 25 * 2];
     console_initialise(80, 25, 2, framebuffer, 0x00);
     
     // When
@@ -28,7 +28,7 @@ MunitResult console_should_write_hello_world_with_printstring_statement_test(con
 MunitResult console_should_write_hello_world_with_printstring_statements_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(80 * 25 * 2);
+    unsigned char framebuffer[80 * 25 * 2];
     console_initialise(80, 25, 2, framebuffer, 0x00);
 
     // When
@@ -55,7 +55,7 @@ MunitResult console_should_write_hello_world_with_printstring_statements_test(co
 MunitResult console_should_write_hello_CRLF_world_with_printstring_statement_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(80 * 25 * 2);
+    unsigned char framebuffer[80 * 25 * 2];
     console_initialise(80, 25, 2, framebuffer, 0x00);
 
     // When
@@ -79,7 +79,7 @@ MunitResult console_should_write_hello_CRLF_world_with_printstring_statement_tes
 MunitResult console_should_write_hello_CRLF_world_with_printstring_statements_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(80 * 25 * 2);
+    unsigned char framebuffer[80 * 25 * 2];
     console_initialise(80, 25, 2, framebuffer, 0x00);
 
     // When
@@ -104,7 +104,7 @@ MunitResult console_should_write_hello_CRLF_world_with_printstring_statements_te
 MunitResult console_should_write_hello_CRLF_world_with_printline_statements_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(80 * 25 * 2);
+    unsigned char framebuffer[80 * 25 * 2];
     console_initialise(80, 25, 2, framebuffer, 0x00);
 
     // When

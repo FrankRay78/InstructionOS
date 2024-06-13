@@ -1,10 +1,14 @@
 #pragma once
 
+#include <stddef.h>
 #include "framebuffer.h"
 
 
 // Initialise the virtual console
 void console_initialise(int width, int height, int bytes_per_pixel, unsigned char* framebuffer, char attribute);
+
+// Set the cursor position
+void console_setcursor(int x, int y);
 
 // Blank the screen by writing the ASCII space character to each character cell
 void console_clear();

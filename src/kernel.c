@@ -17,6 +17,7 @@ asmlinkage int kernel_main()
 
 
     console_clear();
+    console_setcursor(0, 0);
     
     console_printstring("\n InstructionOS");
 

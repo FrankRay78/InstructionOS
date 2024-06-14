@@ -4,10 +4,10 @@ HEADERS   = $(wildcard ../src/*.h *.h)
 C_SOURCES = $(wildcard ../src/*.c *.c)
 OBJ=${C_SOURCES:.c=.o}
 
-CC_FLAGS= -std=c99 -Wall -Wextra -g -Wno-unused-parameter
+CC_FLAGS= -std=c99 -Wall -Wextra -Werror -g -Wno-unused-parameter
 CC=gcc
 
-LD_FLAGS= -std=c99 -Wall -Wextra -g -Wno-unused-parameter
+LD_FLAGS= -std=c99 -Wall -Wextra -Werror -g -Wno-unused-parameter
 LD=gcc
 
 

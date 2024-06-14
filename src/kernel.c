@@ -84,6 +84,15 @@ asmlinkage int kernel_main()
     debug("Monkey lives here");
     debug("Snail lives here");
 
+    debug("aaa");
+    //debug_writechar((char)'\0');
+    debug_writechar((char)'\n');
+    debug("bbb");
+    /*debug_writechar(NULL);
+    debug("ccc");
+    debug_writechar((void*)0);
+    debug("ddd");*/
+
     console_printstring("\n InstructionOS");
 
 

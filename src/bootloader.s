@@ -20,9 +20,9 @@ start:
     cli                   ; block interrupts (nb. not necessary, as QEMU boots into 32-bit protected mode with interrupts disabled)
     mov esp, stack_space  ; set stack pointer
 
-    ; Write to QEMU's debug port
-    mov al, 'F'
-    out 0xe9, al
+    ;; Write to QEMU's debug port
+    ;mov al, 'F'
+    ;out 0xe9, al
 
     call kernel_main
     hlt

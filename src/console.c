@@ -24,15 +24,24 @@ void console_initialise(int console_width, int console_height, int console_bytes
 }
 
 //https://gitlab.com/SpectralMemories/chados/-/blob/master/kernel/arch/i386/tty.c?ref_type=heads
-//https://www.khoury.northeastern.edu/home/skotthe/classes/cs5600/fall/2016/pintos/doc/standards/freevga/vga/textcur.htm
-//freestanding headers
+
+// Manipulating the Text-mode Cursor
+// ref: https://www.khoury.northeastern.edu/home/skotthe/classes/cs5600/fall/2016/pintos/doc/standards/freevga/vga/textcur.htm
+
 void console_setcursor(int x, int y)
 {
+    /*
+    __asm__("movb $'F', %al\n\t"
+            "outb %al, $0xe9\n\t");
+    */
+
+    /*
     uint16_t pos = y * width + x;
     outb(0x3D4, 0x0F);
     outb(0x3D5, (uint8_t)(pos & 0xFF));
     outb(0x3D4, 0x0E);
     outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
+     */
 }
 
 void console_writechar(char c) 

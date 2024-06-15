@@ -13,13 +13,24 @@
 
 asmlinkage int kernel_main()
 {
+    debug_message("Initialising console");
+
     console_initialise(CONSOLE_MAX_WIDTH, CONSOLE_MAX_HEIGHT, CONSOLE_BYTES_PER_PIXEL, (unsigned char*)CONSOLE_VIDEO_ADDRESS, (char)CONSOLE_WHITE_ON_BLUE);
 
 
+    debug_message("Clearing console");
+
     console_clear();
-    
+
+
+    debug_message("Drawing welcome screen");
+
     console_printstring("\n InstructionOS");
+
+
+    debug_message("Ready");
 
 
     return 0;
 }
+

@@ -4,22 +4,22 @@ SECTIONS
 {
     . = 0x00100000;
  
-    .text ALIGN(0x1000) :
+    .text ALIGN(4K) :
     {
         *(.text)
     }
  
-    .rodata ALIGN(0x1000) :
+    .rodata ALIGN(4K) :
     {
         *(.rodata*)
     }
  
-    .data ALIGN(0x1000) :
+    .data ALIGN(4K) :
     {
         *(.data)
     }
  
-    .bss ALIGN(0x1000) :
+    .bss ALIGN(4K) :
     {
         *(COMMON)
         *(.bss)

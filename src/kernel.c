@@ -21,6 +21,10 @@ void debug_writechar(char c)
     */
 
     //asm( "outb %%al, $0xe9" :: "a"(c) );
+
+    // How to Use Inline Assembly Language in C Code
+    // ref: https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html
+    
     asm( "outb %0, $0xe9" :: "a"(c) );
 }
 

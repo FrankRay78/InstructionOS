@@ -13,10 +13,15 @@
 
 void debug_writechar(char c)
 {
+    /*
     __asm__ ("movb %0, %%al\n\t"
             "outb %%al, $0xe9"
     :
     : "r" (c));
+    */
+
+    //asm( "outb %%al, $0xe9" :: "a"(c) );
+    asm( "outb %0, $0xe9" :: "a"(c) );
 }
 
 void debug(char* message)
@@ -33,7 +38,7 @@ void debug(char* message)
 
     //debug_writechar(' ');
 
-    for (volatile int i = 0; message[i] != 0; i++)
+    for (int i = 0; message[i] != 0; i++)
     {
         if (i == 0)
         {

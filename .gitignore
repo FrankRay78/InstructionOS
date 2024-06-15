@@ -1,6 +1,9 @@
+
 # InstructionOS
 .idea
+src/debugcon.txt
 test/main
+
 
 # Prerequisites
 *.d

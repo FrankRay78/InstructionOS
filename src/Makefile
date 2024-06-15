@@ -7,10 +7,10 @@ OBJ=${C_SOURCES:.c=.o}
 ASM_SOURCES = $(wildcard *.s)
 ASM_OBJ =${ASM_SOURCES:.s=.o}
 
-CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g -Wno-unused-parameter
+CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 CC=i686-elf-gcc
 
-LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -g -Wno-unused-parameter
+LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 LD=i686-elf-gcc
 
 
@@ -18,7 +18,9 @@ LD=i686-elf-gcc
 # Build and run the kernel
 #
 run: build
-	qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -monitor stdio
+	#qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -monitor stdio
+	qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon stdio
+	#qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon file:debugcon.txt
 
 build: kernel.bin
 

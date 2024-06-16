@@ -5,7 +5,7 @@ MunitResult console_should_write_hello_world_with_printstring_statement_test(con
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
     
     // When
     console_printstring("Hello World");
@@ -30,7 +30,7 @@ MunitResult console_should_write_hello_world_with_printstring_statements_test(co
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("Hello");
@@ -57,7 +57,7 @@ MunitResult console_should_write_hello_CRLF_world_with_printstring_statement_tes
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("Hello\nWorld\n");
@@ -81,7 +81,7 @@ MunitResult console_should_write_hello_CRLF_world_with_printstring_statements_te
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("Hello\n");
@@ -106,7 +106,7 @@ MunitResult console_should_write_hello_CRLF_world_with_printline_statements_test
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printline("Hello");

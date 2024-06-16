@@ -5,7 +5,7 @@ MunitResult console_should_write_ABC_DEF_GHI_test(const MunitParameter params[],
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, 2, framebuffer, 0x00);
+    console_initialise(3, 3, framebuffer, 0x00);
 
     // When
     console_printstring("ABCDEFGHI");
@@ -28,7 +28,7 @@ MunitResult console_should_clear_ABC_DEF_GHI_test(const MunitParameter params[],
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, 2, framebuffer, 0x00);
+    console_initialise(3, 3, framebuffer, 0x00);
 
     // When
     console_printstring("ABCDEFGHI");
@@ -52,7 +52,7 @@ MunitResult console_should_scroll_one_line_test(const MunitParameter params[], v
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, 2, framebuffer, 0x00);
+    console_initialise(3, 3, framebuffer, 0x00);
 
     // When
     console_printstring("AAA");
@@ -78,7 +78,7 @@ MunitResult console_should_scroll_two_lines_test(const MunitParameter params[], 
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, 2, framebuffer, 0x00);
+    console_initialise(3, 3, framebuffer, 0x00);
 
     // When
     console_printstring("AAA");
@@ -105,7 +105,7 @@ MunitResult console_should_scroll_three_lines_test(const MunitParameter params[]
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, 2, framebuffer, 0x00);
+    console_initialise(3, 3, framebuffer, 0x00);
 
     // When
     console_printstring("AAA");
@@ -133,7 +133,7 @@ MunitResult console_should_scroll_and_blank_last_line_test(const MunitParameter 
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, 2, framebuffer, 0x00);
+    console_initialise(3, 3, framebuffer, 0x00);
 
     // When
     console_printstring("AAA");

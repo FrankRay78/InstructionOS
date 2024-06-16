@@ -5,7 +5,7 @@ MunitResult console_should_write_AB_test(const MunitParameter params[], void* us
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("AB");
@@ -21,7 +21,7 @@ MunitResult console_should_clear_AB_test(const MunitParameter params[], void* us
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("AB");
@@ -38,7 +38,7 @@ MunitResult console_should_write_A_EOL_B_test(const MunitParameter params[], voi
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("A\nB");
@@ -54,7 +54,7 @@ MunitResult console_should_clear_A_EOL_B_test(const MunitParameter params[], voi
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, 2, framebuffer, 0x00);
+    console_initialise(80, 25, framebuffer, 0x00);
 
     // When
     console_printstring("A\nB");

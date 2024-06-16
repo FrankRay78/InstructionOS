@@ -2,7 +2,7 @@
 
 
 // Initialise the virtual console
-void console_initialise(int width, int height, int bytes_per_pixel, unsigned char* framebuffer, char attribute);
+void console_initialise(int width, int height, unsigned char* framebuffer, char attribute);
 
 // Blank the screen by writing the ASCII space character to each character cell
 void console_clear();

@@ -11,7 +11,7 @@ int column;
 int row;
 
 
-void console_initialise(int console_width, int console_height, int console_bytes_per_pixel, unsigned char* console_framebuffer, char console_attribute)
+void console_initialise(int console_width, int console_height, unsigned char* console_framebuffer, char console_attribute)
 {
 	width = console_width;
 	height = console_height;

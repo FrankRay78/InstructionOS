@@ -1,4 +1,6 @@
 #include "kernel.h"
+#include "console.h"
+#include "debug.h"
 
 
 // Assumes VGA text mode 7 (80 x 25)

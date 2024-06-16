@@ -1,4 +1,5 @@
 #include "framebuffer_tests.h"
+#include "../src/framebuffer.h"
 
 MunitResult framebuffer_should_contain_hello_test(const MunitParameter params[], void* user_data_or_fixture)
 {

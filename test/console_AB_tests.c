@@ -1,4 +1,5 @@
 #include "console_AB_tests.h"
+#include "../src/console.h"
 
 MunitResult console_should_write_AB_test(const MunitParameter params[], void* user_data_or_fixture)
 {

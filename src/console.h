@@ -1,7 +1,5 @@
 #pragma once
 
-#include "framebuffer.h"
-
 
 // Initialise the virtual console
 void console_initialise(int width, int height, int bytes_per_pixel, unsigned char* framebuffer, char attribute);

@@ -4,7 +4,7 @@
 MunitResult framebuffer_should_contain_hello_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(5);
+    unsigned char framebuffer[5];
     framebuffer_initialise(framebuffer);
 
     // When
@@ -27,7 +27,7 @@ MunitResult framebuffer_should_contain_hello_test(const MunitParameter params[],
 MunitResult framebuffer_should_copy_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
-    unsigned char* framebuffer = (unsigned char*)malloc(5);
+    unsigned char framebuffer[5];
     framebuffer_initialise(framebuffer);
     
     framebuffer_writechar(0, 'H');

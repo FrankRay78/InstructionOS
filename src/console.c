@@ -1,4 +1,5 @@
 #include "console.h"
+#include "framebuffer.h"
 
 
 int width;

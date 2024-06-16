@@ -1,4 +1,5 @@
 #include "console_ThreeByThree_tests.h"
+#include "../src/console.h"
 
 MunitResult console_should_write_ABC_DEF_GHI_test(const MunitParameter params[], void* user_data_or_fixture)
 {

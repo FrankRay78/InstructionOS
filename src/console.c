@@ -1,7 +1,10 @@
 #include "console.h"
+#include "cursor.h"
 #include "framebuffer.h"
-#include <stdbool.h>
-#include <stdint.h>
+
+
+// Prototypes
+void console_writechar(char c);
 
 
 int width;
@@ -11,13 +14,6 @@ char attribute;
 // Cursor position
 int column;
 int row;
-
-
-// Manipulating the Text-mode Cursor
-// ref: https://www.khoury.northeastern.edu/home/skotthe/classes/cs5600/fall/2016/pintos/doc/standards/freevga/vga/textcur.htm
-
-#define VGA_ADDRESS_REGISTER 0x3D4
-#define VGA_DATA_REGISTER 0x3D5
 
 
 void console_initialise(int console_width, int console_height, unsigned char* console_framebuffer, char console_attribute)
@@ -33,52 +29,9 @@ void console_initialise(int console_width, int console_height, unsigned char* co
     row = 0;
 }
 
-
-/*
- * Framebuffer manipulation routines
- */
-
-void console_framebuffer_writechar(char c) 
-{
-	// Calculate the positional index required for the linear framebuffer
-	// Each character is represented by two bytes aligned as a 16-bit word
-	// ref: https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement
-
-    framebuffer_writechar(row * width * 2 + column * 2, c);
-    framebuffer_writechar(row * width * 2 + column * 2 + 1, attribute);
-}
-
-
-/*
- * Cursor manipulation routines
- */
-
-void console_cursor_show()
-{
-    asm("outb %b0, %w1" :: "a"(0x0A), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"(0x00), "d"(VGA_DATA_REGISTER));
-}
-
-void console_cursor_hide()
-{
-    asm("outb %b0, %w1" :: "a"(0x0A), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"(0x20), "d"(VGA_DATA_REGISTER));
-}
-
-void console_cursor_setposition(int x, int y)
-{
-    uint16_t pos = y * width + x;
-
-    asm("outb %b0, %w1" :: "a"(0x0F), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"((uint8_t)(pos & 0xFF)), "d"(VGA_DATA_REGISTER));
-    asm("outb %b0, %w1" :: "a"(0x0E), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"((uint8_t)((pos >> 8) & 0xFF)), "d"(VGA_DATA_REGISTER));
-}
-
-
 void console_clear()
 {
-	console_cursor_hide();
+	cursor_hide();
 
 	// Reset the cursor position
 	column = 0;
@@ -93,14 +46,9 @@ void console_clear()
 	column = 0;
 	row = 0;
 
-	console_cursor_show();
-	console_cursor_setposition(column, row);
+	cursor_show();
+	cursor_setposition(column, row, width);
 }
-
-
-/*
- * Character manipulation routines
- */
 
 void console_printline(char* s)
 {
@@ -128,7 +76,7 @@ void console_printchar(char c)
 	    // Blank the last line ready for writing to
 	    for (int i = 0; i < width; i++)
 	    {
-	        console_framebuffer_writechar(' ');
+	        console_writechar(' ');
 
 	        // Move the cursor right by one character
 	        column++;
@@ -150,7 +98,7 @@ void console_printchar(char c)
 	else
 	{
 		// Write the character
-		console_framebuffer_writechar(c);
+		console_writechar(c);
 
 		// Move the cursor right by one character
 		column++;
@@ -164,5 +112,18 @@ void console_printchar(char c)
 		}
 	}
 
-	console_cursor_setposition(column, row);
+	cursor_setposition(column, row, width);
+}
+
+
+// Private:
+
+void console_writechar(char c) 
+{
+	// Calculate the positional index required for the linear framebuffer
+	// Each character is represented by two bytes aligned as a 16-bit word
+	// ref: https://en.wikipedia.org/wiki/VGA_text_mode#Data_arrangement
+
+    framebuffer_writechar(row * width * 2 + column * 2, c);
+    framebuffer_writechar(row * width * 2 + column * 2 + 1, attribute);
 }

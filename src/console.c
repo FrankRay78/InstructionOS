@@ -33,7 +33,12 @@ void console_initialise(int console_width, int console_height, unsigned char* co
     row = 0;
 }
 
-void console_writechar(char c) 
+
+/*
+ * Framebuffer manipulation routines
+ */
+
+void console_framebuffer_writechar(char c) 
 {
 	// Calculate the positional index required for the linear framebuffer
 	// Each character is represented by two bytes aligned as a 16-bit word
@@ -43,22 +48,10 @@ void console_writechar(char c)
     framebuffer_writechar(row * width * 2 + column * 2 + 1, attribute);
 }
 
-/*void console_setcursor_visibility(bool visible)
-{
-	unsigned char cursor_start_register_data;
 
-	if (visible)
-		cursor_start_register_data = 0x00;
-	else
-		cursor_start_register_data = 0x20;
-
-    //Hide the terminal console
-    asm("outb %b0, %w1" :: "a"(0x0A), "d"(0x3D4));
-    asm("outb %b0, %w1" :: "a"(0x20), "d"(0x3D5));
-
-    //asm("outb %0, %1" :: "a"((unsigned char)0x0A), "d"((unsigned short)0x3D4));
-    //asm("outb %0, %1" :: "a"((unsigned char)0x20), "d"((unsigned short)0x3D5));
-}*/
+/*
+ * Cursor manipulation routines
+ */
 
 void console_cursor_show()
 {
@@ -82,6 +75,7 @@ void console_cursor_setposition(int x, int y)
     asm("outb %b0, %w1" :: "a"((uint8_t)((pos >> 8) & 0xFF)), "d"(VGA_DATA_REGISTER));
 }
 
+
 void console_clear()
 {
 	console_cursor_hide();
@@ -100,8 +94,13 @@ void console_clear()
 	row = 0;
 
 	console_cursor_show();
-	console_cursor_setposition(1, 1);
+	console_cursor_setposition(column, row);
 }
+
+
+/*
+ * Character manipulation routines
+ */
 
 void console_printline(char* s)
 {
@@ -129,7 +128,7 @@ void console_printchar(char c)
 	    // Blank the last line ready for writing to
 	    for (int i = 0; i < width; i++)
 	    {
-	        console_writechar(' ');
+	        console_framebuffer_writechar(' ');
 
 	        // Move the cursor right by one character
 	        column++;
@@ -140,24 +139,30 @@ void console_printchar(char c)
 	}
 
 	// Perform a CRLF if we encounter a Newline character
+	// otherwise write the character to the console
+
 	if (c == '\n')
 	{
+		// Move the cursor to the beginning of the next row
 	    column = 0;
 	    row++;
-
-	    return;
 	}
-
-	console_writechar(c);
-
-	// Move the cursor right by one character
-	column++;
-
-	// Perform a CRLF when the cursor reaches the end of the terminal line
-	// eg.column is 0 to 79, width = 80
-	if (column == width)
+	else
 	{
-	    column = 0;
-	    row++;
+		// Write the character
+		console_framebuffer_writechar(c);
+
+		// Move the cursor right by one character
+		column++;
+
+		// Perform a CRLF when the cursor reaches the end of the terminal line
+		// eg.column is 0 to 79, width = 80
+		if (column == width)
+		{
+		    column = 0;
+		    row++;
+		}
 	}
+
+	console_cursor_setposition(column, row);
 }

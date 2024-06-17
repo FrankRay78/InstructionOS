@@ -1,5 +1,7 @@
 #include "console.h"
 #include "framebuffer.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 
 int width;
@@ -9,6 +11,13 @@ char attribute;
 // Cursor position
 int column;
 int row;
+
+
+// Manipulating the Text-mode Cursor
+// ref: https://www.khoury.northeastern.edu/home/skotthe/classes/cs5600/fall/2016/pintos/doc/standards/freevga/vga/textcur.htm
+
+#define VGA_ADDRESS_REGISTER 0x3D4
+#define VGA_DATA_REGISTER 0x3D5
 
 
 void console_initialise(int console_width, int console_height, unsigned char* console_framebuffer, char console_attribute)
@@ -34,8 +43,49 @@ void console_writechar(char c)
     framebuffer_writechar(row * width * 2 + column * 2 + 1, attribute);
 }
 
+/*void console_setcursor_visibility(bool visible)
+{
+	unsigned char cursor_start_register_data;
+
+	if (visible)
+		cursor_start_register_data = 0x00;
+	else
+		cursor_start_register_data = 0x20;
+
+    //Hide the terminal console
+    asm("outb %b0, %w1" :: "a"(0x0A), "d"(0x3D4));
+    asm("outb %b0, %w1" :: "a"(0x20), "d"(0x3D5));
+
+    //asm("outb %0, %1" :: "a"((unsigned char)0x0A), "d"((unsigned short)0x3D4));
+    //asm("outb %0, %1" :: "a"((unsigned char)0x20), "d"((unsigned short)0x3D5));
+}*/
+
+void console_cursor_show()
+{
+    asm("outb %b0, %w1" :: "a"(0x0A), "d"(VGA_ADDRESS_REGISTER));
+    asm("outb %b0, %w1" :: "a"(0x00), "d"(VGA_DATA_REGISTER));
+}
+
+void console_cursor_hide()
+{
+    asm("outb %b0, %w1" :: "a"(0x0A), "d"(VGA_ADDRESS_REGISTER));
+    asm("outb %b0, %w1" :: "a"(0x20), "d"(VGA_DATA_REGISTER));
+}
+
+void console_cursor_setposition(int x, int y)
+{
+    uint16_t pos = y * width + x;
+
+    asm("outb %b0, %w1" :: "a"(0x0F), "d"(VGA_ADDRESS_REGISTER));
+    asm("outb %b0, %w1" :: "a"((uint8_t)(pos & 0xFF)), "d"(VGA_DATA_REGISTER));
+    asm("outb %b0, %w1" :: "a"(0x0E), "d"(VGA_ADDRESS_REGISTER));
+    asm("outb %b0, %w1" :: "a"((uint8_t)((pos >> 8) & 0xFF)), "d"(VGA_DATA_REGISTER));
+}
+
 void console_clear()
 {
+	console_cursor_hide();
+
 	// Reset the cursor position
 	column = 0;
 	row = 0;
@@ -48,6 +98,9 @@ void console_clear()
 	// Reset the cursor position
 	column = 0;
 	row = 0;
+
+	console_cursor_show();
+	console_cursor_setposition(1, 1);
 }
 
 void console_printline(char* s)

@@ -6,7 +6,7 @@ MunitResult console_should_write_ABC_DEF_GHI_test(const MunitParameter params[],
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
@@ -30,7 +30,7 @@ MunitResult console_should_clear_ABC_DEF_GHI_test(const MunitParameter params[],
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
@@ -55,7 +55,7 @@ MunitResult console_should_scroll_one_line_test(const MunitParameter params[], v
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
@@ -82,7 +82,7 @@ MunitResult console_should_scroll_two_lines_test(const MunitParameter params[], 
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
@@ -110,7 +110,7 @@ MunitResult console_should_scroll_three_lines_test(const MunitParameter params[]
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
@@ -139,7 +139,7 @@ MunitResult console_should_scroll_and_blank_last_line_test(const MunitParameter 
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When

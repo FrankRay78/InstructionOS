@@ -6,7 +6,7 @@ MunitResult console_should_write_AB_test(const MunitParameter params[], void* us
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
@@ -23,7 +23,7 @@ MunitResult console_should_clear_AB_test(const MunitParameter params[], void* us
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
@@ -41,7 +41,7 @@ MunitResult console_should_write_A_EOL_B_test(const MunitParameter params[], voi
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
@@ -58,7 +58,7 @@ MunitResult console_should_clear_A_EOL_B_test(const MunitParameter params[], voi
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    Cursor cursor = create_cursor();
+    Cursor cursor = create_cursor_mock();
     console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When

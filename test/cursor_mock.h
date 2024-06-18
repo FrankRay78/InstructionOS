@@ -4,4 +4,4 @@
 
 
 // Factory to create cursor
-Cursor create_cursor();
+Cursor create_cursor_mock();

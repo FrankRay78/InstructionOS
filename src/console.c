@@ -1,5 +1,4 @@
 #include "console.h"
-#include "cursor.h"
 #include "framebuffer.h"
 
 

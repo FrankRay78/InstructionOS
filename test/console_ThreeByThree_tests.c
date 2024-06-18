@@ -1,11 +1,13 @@
 #include "console_ThreeByThree_tests.h"
 #include "../src/console.h"
+#include "cursor_mock.h"
 
 MunitResult console_should_write_ABC_DEF_GHI_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, framebuffer, 0x00);
+    Cursor cursor = create_cursor();
+    console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("ABCDEFGHI");
@@ -28,7 +30,8 @@ MunitResult console_should_clear_ABC_DEF_GHI_test(const MunitParameter params[],
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, framebuffer, 0x00);
+    Cursor cursor = create_cursor();
+    console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("ABCDEFGHI");
@@ -52,7 +55,8 @@ MunitResult console_should_scroll_one_line_test(const MunitParameter params[], v
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, framebuffer, 0x00);
+    Cursor cursor = create_cursor();
+    console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("AAA");
@@ -78,7 +82,8 @@ MunitResult console_should_scroll_two_lines_test(const MunitParameter params[], 
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, framebuffer, 0x00);
+    Cursor cursor = create_cursor();
+    console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("AAA");
@@ -105,7 +110,8 @@ MunitResult console_should_scroll_three_lines_test(const MunitParameter params[]
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, framebuffer, 0x00);
+    Cursor cursor = create_cursor();
+    console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("AAA");
@@ -133,7 +139,8 @@ MunitResult console_should_scroll_and_blank_last_line_test(const MunitParameter 
 {
     // Given
     unsigned char framebuffer[3 * 3 * 2];
-    console_initialise(3, 3, framebuffer, 0x00);
+    Cursor cursor = create_cursor();
+    console_initialise(3, 3, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("AAA");

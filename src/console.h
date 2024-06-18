@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "cursor.h"
+#include "sharedtypes.h"
 
 
 // Initialise the virtual console

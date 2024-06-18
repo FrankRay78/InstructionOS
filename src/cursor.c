@@ -1,5 +1,4 @@
 #include "cursor.h"
-#include <stdbool.h>
 #include <stdint.h>
 
 

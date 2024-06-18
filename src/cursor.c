@@ -31,3 +31,14 @@ void cursor_setposition(int x, int y, int width)
     asm("outb %b0, %w1" :: "a"(0x0E), "d"(VGA_ADDRESS_REGISTER));
     asm("outb %b0, %w1" :: "a"((uint8_t)((pos >> 8) & 0xFF)), "d"(VGA_DATA_REGISTER));
 }
+
+
+Cursor create_cursor() {
+    Cursor cursor;
+    
+    cursor.Show = cursor_show;
+    cursor.Hide = cursor_hide;
+    cursor.SetPosition = cursor_setposition;
+
+    return cursor;
+}

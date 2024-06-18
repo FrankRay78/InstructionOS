@@ -15,12 +15,15 @@ char attribute;
 int column;
 int row;
 
+Cursor cursor;
 
-void console_initialise(int console_width, int console_height, unsigned char* console_framebuffer, char console_attribute)
+
+void console_initialise(int console_width, int console_height, unsigned char* console_framebuffer, char console_attribute, Cursor console_cursor)
 {
 	width = console_width;
 	height = console_height;
 	attribute = console_attribute;
+	cursor = console_cursor;
 
 	framebuffer_initialise(console_framebuffer);
 
@@ -31,7 +34,8 @@ void console_initialise(int console_width, int console_height, unsigned char* co
 
 void console_clear()
 {
-	cursor_hide();
+	//cursor_hide();
+	cursor.Hide();
 
 	// Reset the cursor position
 	column = 0;
@@ -46,8 +50,10 @@ void console_clear()
 	column = 0;
 	row = 0;
 
-	cursor_show();
-	cursor_setposition(column, row, width);
+	//cursor_show();
+	//cursor_setposition(column, row, width);
+	cursor.Show();
+	cursor.SetPosition(column, row, width);
 }
 
 void console_printline(char* s)
@@ -112,7 +118,8 @@ void console_printchar(char c)
 		}
 	}
 
-	cursor_setposition(column, row, width);
+	//cursor_setposition(column, row, width);
+	cursor.SetPosition(column, row, width);
 }
 
 

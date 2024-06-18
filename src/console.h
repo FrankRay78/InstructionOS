@@ -1,8 +1,11 @@
 #pragma once
 
 
+#include "cursor.h"
+
+
 // Initialise the virtual console
-void console_initialise(int width, int height, unsigned char* framebuffer, char attribute);
+void console_initialise(int width, int height, unsigned char* framebuffer, char attribute, Cursor console_cursor);
 
 // Blank the screen by writing the ASCII space character to each character cell
 void console_clear();

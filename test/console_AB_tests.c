@@ -1,11 +1,13 @@
 #include "console_AB_tests.h"
 #include "../src/console.h"
+#include "cursor_mock.h"
 
 MunitResult console_should_write_AB_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("AB");
@@ -21,7 +23,8 @@ MunitResult console_should_clear_AB_test(const MunitParameter params[], void* us
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("AB");
@@ -38,7 +41,8 @@ MunitResult console_should_write_A_EOL_B_test(const MunitParameter params[], voi
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("A\nB");
@@ -54,7 +58,8 @@ MunitResult console_should_clear_A_EOL_B_test(const MunitParameter params[], voi
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("A\nB");

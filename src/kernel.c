@@ -1,4 +1,5 @@
 #include "kernel.h"
+#include "cursor.h"
 #include "console.h"
 #include "debug.h"
 
@@ -14,23 +15,18 @@
 
 asmlinkage int kernel_main()
 {
-    debug_message("Initialising console");
+    debug_message("Initialising");
 
-    console_initialise(CONSOLE_WIDTH, CONSOLE_HEIGHT, (unsigned char*)CONSOLE_VIDEO_ADDRESS, (char)CONSOLE_WHITE_ON_BLUE);
+    Cursor cursor = create_cursor();
 
-
-    debug_message("Clearing console");
+    console_initialise(CONSOLE_WIDTH, CONSOLE_HEIGHT, (unsigned char*)CONSOLE_VIDEO_ADDRESS, (char)CONSOLE_WHITE_ON_BLUE, cursor);
 
     console_clear();
 
-
-    debug_message("Drawing welcome screen");
-
     console_printstring("\n InstructionOS");
-
+    console_printstring("\n\n > ");
 
     debug_message("Ready");
-
 
     return 0;
 }

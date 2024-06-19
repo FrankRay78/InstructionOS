@@ -1,11 +1,13 @@
 #include "console_HelloWorld_tests.h"
 #include "../src/console.h"
+#include "cursor_mock.h"
 
 MunitResult console_should_write_hello_world_with_printstring_statement_test(const MunitParameter params[], void* user_data_or_fixture)
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
     
     // When
     console_printstring("Hello World");
@@ -30,7 +32,8 @@ MunitResult console_should_write_hello_world_with_printstring_statements_test(co
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("Hello");
@@ -57,7 +60,8 @@ MunitResult console_should_write_hello_CRLF_world_with_printstring_statement_tes
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("Hello\nWorld\n");
@@ -81,7 +85,8 @@ MunitResult console_should_write_hello_CRLF_world_with_printstring_statements_te
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printstring("Hello\n");
@@ -106,7 +111,8 @@ MunitResult console_should_write_hello_CRLF_world_with_printline_statements_test
 {
     // Given
     unsigned char framebuffer[80 * 25 * 2];
-    console_initialise(80, 25, framebuffer, 0x00);
+    Cursor cursor = create_cursor_mock();
+    console_initialise(80, 25, framebuffer, 0x00, cursor);
 
     // When
     console_printline("Hello");

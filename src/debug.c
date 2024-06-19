@@ -13,7 +13,7 @@ void debug_writechar(char c)
     // GCC uses AT&T/UNIX asm syntax (not Intel)
     // ref: https://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#toc3
     
-    asm( "outb %0, %1" :: "a"(c), "Nd"(DEBUG_PORT) );
+    asm("outb %0, %1" :: "a"(c), "Nd"(DEBUG_PORT));
 }
 
 void debug_message(char* message)

@@ -2,6 +2,7 @@
 #include "console_AB_tests.h"
 #include "console_HelloWorld_tests.h"
 #include "console_ThreeByThree_tests.h"
+#include "cursor_tests.h"
 #include "framebuffer_tests.h"
 #include "munit.h"
 
@@ -11,6 +12,7 @@ static MunitSuite kernel_suites[] = {
   { "", console_AB_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "", console_HelloWorld_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { "", console_ThreeByThree_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
+  { "", cursor_tests, NULL, 1, MUNIT_SUITE_OPTION_NONE },
   { NULL, NULL, NULL, 0, MUNIT_SUITE_OPTION_NONE }
 };
 

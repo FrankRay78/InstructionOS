@@ -2,4 +2,4 @@
 
 #include "munit.h"
 
-extern MunitTest cursor_tests[];
+extern MunitTest console_tests[];

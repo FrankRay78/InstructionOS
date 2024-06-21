@@ -71,26 +71,6 @@ void console_printstring(char* s)
 
 void console_printchar(char c)
 {
-	// Scroll if the cursor has dropped off the bottom of the terminal
-	if (row == height)
-	{
-	    framebuffer_copy(width * 2, 0, (height - 1) * width * 2);
-
-	    row--;
-
-	    // Blank the last line ready for writing to
-	    for (int i = 0; i < width; i++)
-	    {
-	        console_writechar(' ');
-
-	        // Move the cursor right by one character
-	        column++;
-	    }
-
-	    // Move the cursor to the beginning of the current line
-	    column = 0;
-	}
-
 	// Perform a CRLF if we encounter a Newline character
 	// otherwise write the character to the console
 
@@ -117,7 +97,26 @@ void console_printchar(char c)
 		}
 	}
 
-	//cursor_setposition(column, row, width);
+	// Scroll if the cursor has dropped off the bottom of the terminal
+	if (row == height)
+	{
+	    framebuffer_copy(width * 2, 0, (height - 1) * width * 2);
+
+	    row--;
+
+	    // Blank the last line ready for writing to
+	    for (int i = 0; i < width; i++)
+	    {
+	        console_writechar(' ');
+
+	        // Move the cursor right by one character
+	        column++;
+	    }
+
+	    // Move the cursor to the beginning of the current line
+	    column = 0;
+	}
+
 	cursor.SetPosition(column, row, width);
 }
 

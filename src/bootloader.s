@@ -20,7 +20,7 @@ section .text
     dd CHECKSUM
 
 start:
-    cli                           ; block interrupts (nb. not necessary, as QEMU boots into 32-bit protected mode with interrupts disabled)
+    cli                           ; Block interrupts (nb. not necessary, as QEMU boots into 32-bit protected mode with interrupts disabled)
 
     lgdt [gdt_descriptor]
 

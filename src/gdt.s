@@ -14,7 +14,7 @@ gdt_null:           ; Mandatory null descriptor
     dd 0x0          ; all 8 bytes 0s
 
 gdt_code:           ; Code segment descriptor
-    ; base= 0x0, limit=0xffff
+    ; Base=0x0, Limit=0xffff
     ; 1st  flags: (present)1 (privilege)00 (descriptor type)1 -> 1001b
     ; type flags: (code)1 (conforming)0 (readable)1 (accessed)0 -> 1010b
     ; 2nd  flags: (granularity)1 (32-bit seg)1 (64-bit seg)0 (reserved)0 -> 1100b

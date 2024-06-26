@@ -1,4 +1,5 @@
 #include "debug.h"
+#include "port.h"
 #include <stddef.h>
 
 
@@ -7,13 +8,7 @@
 
 void debug_writechar(char c)
 {
-    // How to Use Inline Assembly Language in C Code
-    // ref: https://gcc.gnu.org/onlinedocs/gcc/Using-Assembly-Language-with-C.html
-
-    // GCC uses AT&T/UNIX asm syntax (not Intel)
-    // ref: https://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#toc3
-    
-    asm("outb %0, %1" :: "a"(c), "Nd"(DEBUG_PORT));
+    port_writechar(c, DEBUG_PORT);
 }
 
 void debug_message(char* message)

@@ -33,7 +33,6 @@ void console_initialise(int console_width, int console_height, unsigned char* co
 
 void console_clear()
 {
-	//cursor_hide();
 	cursor.Hide();
 
 	// Reset the cursor position
@@ -49,8 +48,6 @@ void console_clear()
 	column = 0;
 	row = 0;
 
-	//cursor_show();
-	//cursor_setposition(column, row, width);
 	cursor.Show();
 	cursor.SetPosition(column, row, width);
 }

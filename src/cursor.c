@@ -1,4 +1,5 @@
 #include "cursor.h"
+#include "port.h"
 #include <stdint.h>
 
 
@@ -11,24 +12,24 @@
 
 void cursor_show()
 {
-    asm("outb %b0, %w1" :: "a"(0x0A), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"(0x00), "d"(VGA_DATA_REGISTER));
+    port_writechar(0x0A, VGA_ADDRESS_REGISTER);
+    port_writechar(0x00, VGA_DATA_REGISTER);
 }
 
 void cursor_hide()
 {
-    asm("outb %b0, %w1" :: "a"(0x0A), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"(0x20), "d"(VGA_DATA_REGISTER));
+    port_writechar(0x0A, VGA_ADDRESS_REGISTER);
+    port_writechar(0x20, VGA_DATA_REGISTER);
 }
 
 void cursor_setposition(int x, int y, int width)
 {
     uint16_t pos = y * width + x;
 
-    asm("outb %b0, %w1" :: "a"(0x0F), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"((uint8_t)(pos & 0xFF)), "d"(VGA_DATA_REGISTER));
-    asm("outb %b0, %w1" :: "a"(0x0E), "d"(VGA_ADDRESS_REGISTER));
-    asm("outb %b0, %w1" :: "a"((uint8_t)((pos >> 8) & 0xFF)), "d"(VGA_DATA_REGISTER));
+    port_writechar(0x0F, VGA_ADDRESS_REGISTER);
+    port_writechar((uint8_t)(pos & 0xFF), VGA_DATA_REGISTER);
+    port_writechar(0x0E, VGA_ADDRESS_REGISTER);
+    port_writechar((uint8_t)((pos >> 8) & 0xFF), VGA_DATA_REGISTER);
 }
 
 

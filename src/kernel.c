@@ -2,6 +2,8 @@
 #include "cursor.h"
 #include "console.h"
 #include "debug.h"
+#include "interrupt.h"
+//#include "port.h"
 
 
 // Assumes VGA text mode 7 (80 x 25)
@@ -26,8 +28,17 @@ asmlinkage int kernel_main()
     console_printstring("\n InstructionOS");
     console_printstring("\n\n > ");
 
+    interrupt_initialise();
+
     debug_message("Ready");
 
     return 0;
 }
 
+void kernel_keyboard_handler(void) 
+{
+    //TODO: Process the actual key press
+
+    debug_writechar('.');
+    //console_printchar('.');
+}

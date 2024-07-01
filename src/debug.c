@@ -8,7 +8,7 @@
 
 void debug_writechar(char c)
 {
-    port_writechar(c, DEBUG_PORT);
+    port_writechar(DEBUG_PORT, c);
 }
 
 void debug_message(char* message)

@@ -12,24 +12,24 @@
 
 void cursor_show()
 {
-    port_writechar(0x0A, VGA_ADDRESS_REGISTER);
-    port_writechar(0x00, VGA_DATA_REGISTER);
+    port_writechar(VGA_ADDRESS_REGISTER, 0x0A);
+    port_writechar(VGA_DATA_REGISTER, 0x00);
 }
 
 void cursor_hide()
 {
-    port_writechar(0x0A, VGA_ADDRESS_REGISTER);
-    port_writechar(0x20, VGA_DATA_REGISTER);
+    port_writechar(VGA_ADDRESS_REGISTER, 0x0A);
+    port_writechar(VGA_DATA_REGISTER, 0x20);
 }
 
 void cursor_setposition(int x, int y, int width)
 {
     uint16_t pos = y * width + x;
 
-    port_writechar(0x0F, VGA_ADDRESS_REGISTER);
-    port_writechar((uint8_t)(pos & 0xFF), VGA_DATA_REGISTER);
-    port_writechar(0x0E, VGA_ADDRESS_REGISTER);
-    port_writechar((uint8_t)((pos >> 8) & 0xFF), VGA_DATA_REGISTER);
+    port_writechar(VGA_ADDRESS_REGISTER, 0x0F);
+    port_writechar(VGA_DATA_REGISTER, (uint8_t)(pos & 0xFF));
+    port_writechar(VGA_ADDRESS_REGISTER, 0x0E);
+    port_writechar(VGA_DATA_REGISTER, (uint8_t)((pos >> 8) & 0xFF));
 }
 
 

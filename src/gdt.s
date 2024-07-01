@@ -7,6 +7,10 @@
 ; Byte reference table on page 36 of bham pdf
 
 
+global CODE_SEGMENT
+global DATA_SEGMENT
+
+
 gdt_start:
 
 gdt_null:           ; Mandatory null descriptor
@@ -47,5 +51,5 @@ gdt_descriptor:
 ; Define constants for the GDT segment descriptor offsets, which
 ; are what segment registers must contain when in protected mode.
 ; In this case (NULL -> 0x0; CODE -> 0x08; DATA -> 0x10)
-CODE_SEG equ gdt_code - gdt_start
-DATA_SEG equ gdt_data - gdt_start
+CODE_SEGMENT equ gdt_code - gdt_start
+DATA_SEGMENT equ gdt_data - gdt_start

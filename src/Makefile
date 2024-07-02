@@ -19,8 +19,8 @@ LD=i686-elf-gcc
 #
 run: build
 	#qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -monitor stdio
-	#qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon stdio
-	qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon stdio -d int #qemu-system-i386 -d help | more
+	qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon stdio
+	#qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon stdio -d int #qemu-system-i386 -d help | more
 	#qemu-system-i386 -kernel kernel.bin -no-reboot -no-shutdown -debugcon file:debugcon.txt
 
 build: kernel.bin

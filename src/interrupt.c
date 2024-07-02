@@ -105,6 +105,8 @@ void idt_load_descriptor()
 #define PIC2_COMMAND (PIC2)
 #define PIC2_DATA    (PIC2+1)
 
+#define PIC_EOI       0x20     // End-of-interrupt command
+
 
 void pic_initialise() 
 {
@@ -144,4 +146,13 @@ void pic_keyboard_interrupt_enable()
 {
 	// Enable only IRQ1 (keyboard) - 0xFD is 11111101
 	port_writechar(PIC1_DATA , 0xFD);
+}
+
+void pic_send_end_of_interrupt()
+{
+	//TODO;
+	//if (irq >= 8)
+	//	port_writechar(PIC2_COMMAND, PIC_EOI);
+
+	port_writechar(PIC1_COMMAND, PIC_EOI);
 }

@@ -1,9 +1,12 @@
-#include "kernel.h"
 #include "cursor.h"
 #include "console.h"
 #include "debug.h"
 #include "interrupt.h"
 //#include "port.h"
+
+
+// On x86 32-bit, all parameters should be passed through the stack
+#define asmlinkage __attribute__((regparm(0)))
 
 
 // Assumes VGA text mode 7 (80 x 25)
@@ -17,7 +20,7 @@
 
 asmlinkage int kernel_main()
 {
-    debug_message("Initialising");
+    debug_printline("Initialising");
 
     Cursor cursor = create_cursor();
 
@@ -30,7 +33,7 @@ asmlinkage int kernel_main()
 
     interrupt_initialise();
 
-    debug_message("Ready");
+    debug_printline("Ready");
 
     return 0;
 }
@@ -39,6 +42,6 @@ void kernel_keyboard_handler(void)
 {
     //TODO: Process the actual key press
 
-    debug_writechar('.');
+    debug_printchar('.');
     //console_printchar('.');
 }

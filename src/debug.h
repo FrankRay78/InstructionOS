@@ -1,5 +1,5 @@
 #pragma once
 
 
-void debug_writechar(char c);
-void debug_message(char* message);
+void debug_printchar(char c);
+void debug_printline(char* s);

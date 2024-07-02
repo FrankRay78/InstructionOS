@@ -32,7 +32,6 @@ load_idt:
     ret
 
 keyboard_handler:                 
-    mov word [0xb8000], 0x0248 ; H
     push ds
     push es
     push fs

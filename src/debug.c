@@ -6,20 +6,20 @@
 #define DEBUG_PORT 0xe9
 
 
-void debug_writechar(char c)
+void debug_printchar(char c)
 {
     port_writechar(DEBUG_PORT, c);
 }
 
-void debug_message(char* message)
+void debug_printline(char* message)
 {
     if (message != NULL)
     {
         for (int i = 0; message[i] != 0; i++)
         {
-            debug_writechar(message[i]);
+            debug_printchar(message[i]);
         }
 
-        debug_writechar('\n');
+        debug_printchar('\n');
     }
 }

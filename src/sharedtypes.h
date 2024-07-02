@@ -2,7 +2,7 @@
 
 
 typedef struct {
-	void (*Show)();
+    void (*Show)();
     void (*Hide)();
     void (*SetPosition)(int x, int y, int width);
 } Cursor;

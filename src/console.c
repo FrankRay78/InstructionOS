@@ -2,10 +2,6 @@
 #include "framebuffer.h"
 
 
-// Prototypes
-void console_writechar(char c);
-
-
 int width;
 int height;
 char attribute;
@@ -15,6 +11,10 @@ int column;
 int row;
 
 Cursor cursor;
+
+
+// Prototypes
+void console_writechar(char c);
 
 
 void console_initialise(int console_width, int console_height, unsigned char* console_framebuffer, char console_attribute, Cursor console_cursor)

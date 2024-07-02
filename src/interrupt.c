@@ -18,7 +18,35 @@
 // ref: https://stanislavs.org/helppc/8259.html
 
 
+extern void keyboard_handler(void);
+
+
+// Prototypes
+void idt_add_entry(uint8_t index, void (*handler)());
+void idt_load_descriptor();
+void pic_initialise();
+void pic_keyboard_interrupt_enable();
+
+
+void interrupt_initialise()
+{
+	pic_initialise();
+
+	idt_add_entry(0x21, keyboard_handler);
+
+	idt_load_descriptor();
+
+	pic_keyboard_interrupt_enable();
+}
+
+
+
+//
+// IDT
+//
+
 #define IDT_SIZE 256
+#define KERNEL_CODE_SEGMENT (1 << 3)
 #define INTERRUPT_GATE 0x8e
 
 
@@ -36,65 +64,23 @@ typedef struct {
 } __attribute__((packed)) IDT_ptr;
 
 
-#define KERNEL_CODE_SEGMENT_OFFSET (1 << 3) //KERNEL_CS
-//extern unsigned int CODE_SEGMENT;
-extern void load_idt(IDT_ptr *idt_ptr);
-extern void keyboard_handler(void);
+static IDT_entry IDT[IDT_SIZE];
+static IDT_ptr idt_ptr;
 
 
-void interrupt_initialise()
+void idt_add_entry(uint8_t index, void (*handler)()) 
 {
-	IDT_entry IDT[IDT_SIZE] = {0};
-	IDT_ptr idt_ptr;
+    unsigned long handler_address = (unsigned long)handler;
 
-	unsigned long keyboard_address;
-	
-	// Populate IDT entry of keyboard's interrupt
-	keyboard_address = (unsigned long)keyboard_handler;
-	IDT[0x21].offset_lowerbits = keyboard_address & 0xffff;
-	IDT[0x21].selector = KERNEL_CODE_SEGMENT_OFFSET;
-	IDT[0x21].zero = 0;
-	IDT[0x21].type_attr = INTERRUPT_GATE;
-	IDT[0x21].offset_higherbits = (keyboard_address & 0xffff0000) >> 16;
+    IDT[index].offset_lowerbits = handler_address & 0xffff;
+    IDT[index].selector = KERNEL_CODE_SEGMENT;
+    IDT[index].zero = 0;
+    IDT[index].type_attr = INTERRUPT_GATE;
+    IDT[index].offset_higherbits = (handler_address & 0xffff0000) >> 16;
+}
 
-
-	// Ports   PIC1 PIC2
-	// Command 0x20 0xA0
-	// Data	   0x21 0xA1
-
-    // TODO: Define constants for PIC1 & 2, as per:
-    // ref: https://github.com/dreamportdev/Osdev-Notes/blob/master/02_Architecture/07_APIC.md
-    // ref: https://wiki.osdev.org/8259_PIC
-
-	// ICW1 - begin initialization
-	port_writechar(0x20, 0x11);
-	port_writechar(0xA0, 0x11);
-
-	// ICW2 - remap offset address of IDT
-	// In x86 protected mode, we have to remap the PICs beyond 0x20 because
-	// Intel have designated the first 32 interrupts as "reserved" for cpu exceptions
-	port_writechar(0x21, 0x20);
-	port_writechar(0xA1, 0x28);
-
-	// ICW3 - setup cascading
-	port_writechar(0x21, 0x00);
-	port_writechar(0xA1, 0x00);
-
-    //ref: https://github.com/josehu07/hux-kernel/wiki/08.-External-Device-Support
-    /*port_writechar(0x21, 0x04);
-    port_writechar(0xA1, 0x02);*/
-
-	// ICW4 - environment info
-	port_writechar(0x21, 0x01);
-	port_writechar(0xA1, 0x01);
-	// Initialization finished
-
-
-	// Disable all IRQ lines
-	port_writechar(0x21, 0xff);
-	port_writechar(0xA1, 0xff);
-
-
+void idt_load_descriptor() 
+{
 	// Populate the IDT descriptor
 	idt_ptr.limit = sizeof(IDT) - 1;
 	idt_ptr.base = (unsigned long)IDT;
@@ -104,8 +90,58 @@ void interrupt_initialise()
     	"lidt (%0)\n\t" 
     	"sti"
     	: : "r" (&idt_ptr));
+}
 
 
+
+//
+// PIC
+//
+
+#define PIC1          0x20     // Master PIC base address
+#define PIC2          0xA0     // Slave PIC base address
+#define PIC1_COMMAND (PIC1)
+#define PIC1_DATA    (PIC1+1)
+#define PIC2_COMMAND (PIC2)
+#define PIC2_DATA    (PIC2+1)
+
+
+void pic_initialise() 
+{
+    // PIC Initialisation
+    // ref: https://wiki.osdev.org/8259_PIC
+
+
+	// ICW1 - Begin initialization
+	port_writechar(PIC1_COMMAND, 0x11);
+	port_writechar(PIC2_COMMAND, 0x11);
+
+	// ICW2 - Remap offset address of IDT
+	// In x86 protected mode, we have to remap the PICs beyond 0x20 because
+	// Intel have designated the first 32 interrupts as "reserved" for cpu exceptions
+	port_writechar(PIC1_DATA, 0x20);
+	port_writechar(PIC2_DATA, 0x28);
+
+	// ICW3 - Setup cascading
+	// Tell Master PIC that there is a slave PIC at IRQ2 (0000 0100)
+	// Tell Slave PIC its cascade identity (0000 0010)
+	port_writechar(PIC1_DATA, 0x00);
+	port_writechar(PIC2_DATA, 0x00);
+
+	// ICW4 - Environment info
+	port_writechar(PIC1_DATA, 0x01);
+	port_writechar(PIC2_DATA, 0x01);
+
+	// PIC remapping finished
+
+
+	// Disable all IRQ lines
+	port_writechar(PIC1_DATA, 0xff);
+	port_writechar(PIC2_DATA, 0xff);
+}
+
+void pic_keyboard_interrupt_enable() 
+{
 	// Enable only IRQ1 (keyboard) - 0xFD is 11111101
-	port_writechar(0x21 , 0xFD);
+	port_writechar(PIC1_DATA , 0xFD);
 }

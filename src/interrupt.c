@@ -1,5 +1,6 @@
 #include "interrupt.h"
 #include "port.h"
+#include <stddef.h>
 
 
 // The following code was inspired by Arjuns Reedharan excellent write up,
@@ -7,18 +8,20 @@
 // ref: https://arjunsreedharan.org/post/99370248137/kernels-201-lets-write-a-kernel-with-keyboard
 
 
-extern void keyboard_handler(void);
-
 
 // Prototypes
-void idt_add_entry(uint8_t index, void (*handler)());
+void idt_add_entry(uint8_t index, void (*handler)(void));
 void idt_load_descriptor();
 void pic_initialise();
 void pic_keyboard_interrupt_enable();
 
 
-void interrupt_initialise()
+void interrupt_initialise(void (*keyboard_handler)(void))
 {
+    if (keyboard_handler == NULL) {
+        return;
+    }
+
 	pic_initialise();
 
 	idt_add_entry(0x21, keyboard_handler);
@@ -64,7 +67,7 @@ static IDT_entry IDT[IDT_SIZE];
 static IDT_ptr idt_ptr;
 
 
-void idt_add_entry(uint8_t index, void (*handler)()) 
+void idt_add_entry(uint8_t index, void (*handler)(void)) 
 {
     unsigned long handler_address = (unsigned long)handler;
 
@@ -150,7 +153,8 @@ void pic_keyboard_interrupt_enable()
 
 void pic_send_end_of_interrupt()
 {
-	//TODO;
+	// TODO:
+	// https://wiki.osdev.org/8259_PIC#End_of_Interrupt
 	//if (irq >= 8)
 	//	port_writechar(PIC2_COMMAND, PIC_EOI);
 

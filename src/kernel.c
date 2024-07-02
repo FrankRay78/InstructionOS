@@ -19,6 +19,10 @@
 #define CONSOLE_WHITE_ON_BLUE  0x1f
 
 
+extern void keyboard_handler(void);
+
+
+
 asmlinkage int kernel_main()
 {
     debug_printline("Initialising");
@@ -32,7 +36,7 @@ asmlinkage int kernel_main()
     console_printstring("\n InstructionOS \n");
     console_printstring("\n > ");
 
-    interrupt_initialise();
+    interrupt_initialise(keyboard_handler);
 
     debug_printline("Ready");
 

@@ -1,7 +1,6 @@
 bits 32         ; nasm directive - 32 bit
 
 global start
-global load_idt
 global keyboard_handler
 
 extern kernel_main

@@ -1,35 +1,11 @@
 #include "interrupt.h"
 #include "port.h"
-#include <stddef.h>
+#include <stdint.h>
 
 
 // The following code was inspired by Arjuns Reedharan excellent write up,
 // "Kernels 201 - Let’s write a Kernel with keyboard and screen support"
 // ref: https://arjunsreedharan.org/post/99370248137/kernels-201-lets-write-a-kernel-with-keyboard
-
-
-
-// Prototypes
-void idt_add_entry(uint8_t index, void (*handler)(void));
-void idt_load_descriptor();
-void pic_initialise();
-void pic_keyboard_interrupt_enable();
-
-
-void interrupt_initialise(void (*keyboard_handler)(void))
-{
-    if (keyboard_handler == NULL) {
-        return;
-    }
-
-    pic_initialise();
-
-    idt_add_entry(0x21, keyboard_handler);
-
-    idt_load_descriptor();
-
-    pic_keyboard_interrupt_enable();
-}
 
 
 

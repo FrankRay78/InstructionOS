@@ -98,11 +98,12 @@ void interrupt_initialise()
 	// Populate the IDT descriptor
 	idt_ptr.limit = sizeof(IDT) - 1;
 	idt_ptr.base = (unsigned long)IDT;
-	load_idt(&idt_ptr);
-    /*asm volatile(
+
+	// Enable interrupts
+    asm volatile(
     	"lidt (%0)\n\t" 
-    	"sti" //turn on interrupts
-    	: : "r" (&idt_ptr));*/
+    	"sti"
+    	: : "r" (&idt_ptr));
 
 
 	// Enable only IRQ1 (keyboard) - 0xFD is 11111101

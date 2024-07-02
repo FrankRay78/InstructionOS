@@ -25,12 +25,6 @@ section .text
 %include "gdt.s"
 
 
-load_idt:
-    mov edx, [esp + 4]
-    lidt [edx]
-    sti                           ; Turn on interrupts
-    ret
-
 keyboard_handler:                 
     push ds
     push es

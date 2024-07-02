@@ -6,17 +6,6 @@
 // "Kernels 201 - Let’s write a Kernel with keyboard and screen support"
 // ref: https://arjunsreedharan.org/post/99370248137/kernels-201-lets-write-a-kernel-with-keyboard
 
-// Other good reference material:
-
-// Handling Interrupts
-// ref: https://github.com/josehu07/hux-kernel/wiki/07.-Handling-Interrupts
-
-// External Device Support
-// ref: https://github.com/josehu07/hux-kernel/wiki/08.-External-Device-Support
-
-// 8259 Programmable Interrupt Controller (PIC)
-// ref: https://stanislavs.org/helppc/8259.html
-
 
 extern void keyboard_handler(void);
 
@@ -44,6 +33,13 @@ void interrupt_initialise()
 //
 // IDT
 //
+
+// Handling Interrupts
+// ref: https://github.com/josehu07/hux-kernel/wiki/07.-Handling-Interrupts
+
+// External Device Support
+// ref: https://github.com/josehu07/hux-kernel/wiki/08.-External-Device-Support
+
 
 #define IDT_SIZE 256
 #define KERNEL_CODE_SEGMENT (1 << 3)
@@ -97,6 +93,10 @@ void idt_load_descriptor()
 //
 // PIC
 //
+
+// 8259 Programmable Interrupt Controller (PIC)
+// ref: https://stanislavs.org/helppc/8259.html
+
 
 #define PIC1          0x20     // Master PIC base address
 #define PIC2          0xA0     // Slave PIC base address

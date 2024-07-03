@@ -7,7 +7,7 @@ unsigned char* buffer;
 
 void framebuffer_initialise(unsigned char* framebuffer)
 {
-	buffer = framebuffer;
+    buffer = framebuffer;
 }
 
 void framebuffer_writechar(int index, char c) 

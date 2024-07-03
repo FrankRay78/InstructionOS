@@ -7,6 +7,10 @@
 ; Byte reference table on page 36 of bham pdf
 
 
+global CODE_SEGMENT
+global DATA_SEGMENT
+
+
 gdt_start:
 
 gdt_null:           ; Mandatory null descriptor
@@ -14,7 +18,7 @@ gdt_null:           ; Mandatory null descriptor
     dd 0x0          ; all 8 bytes 0s
 
 gdt_code:           ; Code segment descriptor
-    ; base= 0x0, limit=0xffff
+    ; Base=0x0, Limit=0xffff
     ; 1st  flags: (present)1 (privilege)00 (descriptor type)1 -> 1001b
     ; type flags: (code)1 (conforming)0 (readable)1 (accessed)0 -> 1010b
     ; 2nd  flags: (granularity)1 (32-bit seg)1 (64-bit seg)0 (reserved)0 -> 1100b
@@ -44,10 +48,8 @@ gdt_descriptor:
     dd gdt_start                ; Start address of the GDT
 
 
-; Define some handy constants for the GDT segment descriptor offsets, which
-; are what segment registers must contain when in protected mode. For example,
-; when we set DS = 0x10 in PM, the CPU knows that we mean it to use the
-; segment described at offset 0x10 (ie. 16 bytes) in our GDT, which in our
-; case is the DATA segment (0x0 -> NULL; 0x08 -> CODE; 0x10 -> DATA)
-CODE_SEG equ gdt_code - gdt_start
-DATA_SEG equ gdt_data - gdt_start
+; Define constants for the GDT segment descriptor offsets, which
+; are what segment registers must contain when in protected mode.
+; In this case (NULL -> 0x0; CODE -> 0x08; DATA -> 0x10)
+CODE_SEGMENT equ gdt_code - gdt_start
+DATA_SEGMENT equ gdt_data - gdt_start

@@ -6,12 +6,13 @@ InstructionOS is a hobby operating system written with a particular interest in 
 
 ## Features
 
-* Bootloader written in NASM assembly
 * Kernel written in ANSI C
+* Bootloader written in NASM assembly
 * Build toolchain written in Makefiles
-* GRUB Multiboot Specification v1 compliant
-* Full 32-bit protected mode
 * Comprehensive unit test coverage
+* Multiboot Specification v1 compliant
+* Full 32-bit protected mode
+* Basic keyboard handler
 * VGA text mode 
 
 ## Progress

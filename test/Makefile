@@ -1,7 +1,7 @@
 
 # Make implicit variables for compilation
 HEADERS   = $(wildcard ../src/*.h *.h)
-C_SOURCES = $(wildcard ../src/*.c *.c)
+C_SOURCES = $(filter-out ../src/kernel.c, $(wildcard ../src/*.c *.c))
 OBJ=${C_SOURCES:.c=.o}
 
 CC_FLAGS= -std=gnu99 -Wall -Wextra -Werror -g -Wno-unused-parameter

@@ -8,6 +8,50 @@
 // ref: https://arjunsreedharan.org/post/99370248137/kernels-201-lets-write-a-kernel-with-keyboard
 
 
+// Prototypes
+void idt_add_entry(uint8_t index, void (*handler)(void));
+void idt_load_descriptor();
+void pic_initialise();
+void pic_set_interrupt_mask(uint8_t mask);
+void pic_send_end_of_interrupt();
+
+
+void interrupt_initialise()
+{
+    pic_initialise();
+}
+
+void interrupt_add_handler(uint8_t index, void (*handler)(void))
+{
+    idt_add_entry(index, handler);
+}
+
+void interrupt_set_mask(uint8_t mask)
+{
+    pic_set_interrupt_mask(mask);
+}
+
+void interrupt_enable_interrupts()
+{
+    idt_load_descriptor();
+
+    // Enable interrupts
+    asm volatile("sti" : : );
+}
+
+void interrupt_disable_interrupts()
+{
+    // Disable interrupts
+    asm volatile("cli" : : );
+}
+
+void interrupt_send_end_of_interrupt()
+{
+    pic_send_end_of_interrupt();
+}
+
+
+
 
 //
 // IDT
@@ -60,11 +104,8 @@ void idt_load_descriptor()
     idt_ptr.limit = sizeof(IDT) - 1;
     idt_ptr.base = (unsigned long)IDT;
 
-    // Enable interrupts
-    asm volatile(
-        "lidt (%0)\n\t" 
-        "sti"
-        : : "r" (&idt_ptr));
+    // Load the IDT
+    asm volatile("lidt (%0)" : : "r" (&idt_ptr));
 }
 
 
@@ -103,16 +144,13 @@ void pic_initialise()
     port_writechar(PIC1_DATA, 0x20);
     port_writechar(PIC2_DATA, 0x28);
 
-    // ICW3 - Setup cascading
-    // Tell Master PIC that there is a slave PIC at IRQ2 (0000 0100)
-    // Tell Slave PIC its cascade identity (0000 0010)
+    // ICW3 - Disable cascading
     port_writechar(PIC1_DATA, 0x00);
     port_writechar(PIC2_DATA, 0x00);
 
     // ICW4 - Environment info
     port_writechar(PIC1_DATA, 0x01);
     port_writechar(PIC2_DATA, 0x01);
-
     // PIC remapping finished
 
 
@@ -121,18 +159,12 @@ void pic_initialise()
     port_writechar(PIC2_DATA, 0xff);
 }
 
-void pic_keyboard_interrupt_enable() 
+void pic_set_interrupt_mask(uint8_t mask) 
 {
-    // Enable only IRQ1 (keyboard) - 0xFD is 11111101
-    port_writechar(PIC1_DATA , 0xFD);
+    port_writechar(PIC1_DATA, mask);
 }
 
 void pic_send_end_of_interrupt()
 {
-    // TODO:
-    // https://wiki.osdev.org/8259_PIC#End_of_Interrupt
-    //if (irq >= 8)
-    //  port_writechar(PIC2_COMMAND, PIC_EOI);
-
     port_writechar(PIC1_COMMAND, PIC_EOI);
 }

@@ -3,8 +3,14 @@
 #include <stdint.h>
 
 
-void idt_add_entry(uint8_t index, void (*handler)(void));
-void idt_load_descriptor();
-void pic_initialise();
-void pic_keyboard_interrupt_enable();
-void pic_send_end_of_interrupt();
+// Usage Notes
+// -----------
+// PIC master/slave cascading has been disabled
+// Interrupt mask and EOI applies only to the master
+
+void interrupt_initialise();
+void interrupt_add_handler(uint8_t index, void (*handler)(void));
+void interrupt_set_mask(uint8_t mask);
+void interrupt_enable_interrupts();
+void interrupt_disable_interrupts();
+void interrupt_send_end_of_interrupt();

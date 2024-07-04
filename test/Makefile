@@ -1,7 +1,8 @@
 
 # Make implicit variables for compilation
-HEADERS   = $(wildcard ../src/*.h *.h)
-C_SOURCES = $(filter-out ../src/kernel.c, $(wildcard ../src/*.c *.c))
+HEADERS   = $(shell find . ../src -name "*.h")
+C_SOURCES = $(shell find . ../src -name "*.c" | grep -v "../src.*/kernel.c")
+
 OBJ=${C_SOURCES:.c=.o}
 
 CC_FLAGS= -std=gnu11 -Wall -Wextra -Werror -g -Wno-unused-parameter
@@ -27,9 +28,8 @@ main: $(OBJ)
 
 
 clean:
-	rm -fd ../src/*.o
-	rm -fd ../src/*.bin
-	rm -fd *.o
+	find .. -name "*.o" -type f -delete
+	find .. -name "*.bin" -type f -delete
 	rm -fd main
 
 .PHONY: clean

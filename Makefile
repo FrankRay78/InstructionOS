@@ -27,9 +27,8 @@ runtest:
 
 
 clean:
-	rm -fd src/*.o
-	rm -fd src/*.bin
-	rm -fd test/*.o
+	find . -name "*.o" -type f -delete
+	find . -name "*.bin" -type f -delete
 	rm -fd test/main
-
+	
 .PHONY: boot test buildkernel runkernel buildtest runtest clean

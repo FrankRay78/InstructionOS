@@ -7,7 +7,7 @@ C_SOURCES = $(shell find . -name "*.c")
 OBJ=${C_SOURCES:.c=.o}
 
 # Dynamically determine include directories for NASM
-ASM_INCLUDE=$(shell find . -type f -name "*.s" -exec dirname {} \; | sort -u | sed 's/^/-I /')
+ASM_INCLUDE=$(shell find . -name "*.s" -exec dirname {} \; | sort -u | sed 's/^/-I /')
 ASM_SOURCES=$(shell find . -name "*.s")
 ASM_OBJ=${ASM_SOURCES:.s=.o}
 

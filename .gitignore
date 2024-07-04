@@ -2,6 +2,7 @@
 # InstructionOS
 .idea
 src/debugcon.txt
+src/kernel.bin
 test/main
 
 

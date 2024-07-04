@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 
 # Make implicit variables for compilation
 HEADERS   = $(shell find .. -name "*.h")

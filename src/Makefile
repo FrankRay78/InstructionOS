@@ -1,11 +1,15 @@
+SHELL := /bin/bash
+
 
 # Make implicit variables for compilation
 HEADERS   = $(shell find . -name "*.h")
 C_SOURCES = $(shell find . -name "*.c")
 OBJ=${C_SOURCES:.c=.o}
 
-ASM_SOURCES = $(shell find . -name "*.s")
-ASM_OBJ =${ASM_SOURCES:.s=.o}
+# Dynamically determine include directories for NASM
+ASM_INCLUDE=$(shell find . -type f -name "*.s" -exec dirname {} \; | sort -u | sed 's/^/-I /')
+ASM_SOURCES=$(shell find . -name "*.s")
+ASM_OBJ=${ASM_SOURCES:.s=.o}
 
 CC_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 CC=i686-elf-gcc
@@ -30,7 +34,7 @@ kernel.bin: $(ASM_OBJ) $(OBJ)
 	$(LD) $(LD_TEMPLATE) -o kernel.bin $(ASM_OBJ) $(OBJ) $(LD_FLAGS)
 
 %.o: %.s
-	nasm -f elf32 $< -o $@
+	nasm -f elf32 $(ASM_INCLUDE) $< -o $@
 
 %.o : %.c ${HEADERS}
 	$(CC) -c $< -o $@ $(CC_FLAGS)

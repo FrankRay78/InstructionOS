@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 
 # Recursive Use of make
 # ref: https://www.gnu.org/software/make/manual/make.html#Recursion

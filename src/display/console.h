@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "shared/types.h"
+#include "../shared/types.h"
 
 
 // Initialise the virtual console

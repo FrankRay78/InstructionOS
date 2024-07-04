@@ -1,7 +1,7 @@
 
 # Make implicit variables for compilation
-HEADERS   = $(shell find . ../src -name "*.h")
-C_SOURCES = $(shell find . ../src -name "*.c" | grep -v "../src.*/kernel.c")
+HEADERS   = $(shell find .. -name "*.h")
+C_SOURCES = $(shell find .. -name "*.c" | grep -v "../src.*/kernel.c")
 
 OBJ=${C_SOURCES:.c=.o}
 

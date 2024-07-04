@@ -1,8 +1,8 @@
-#include "cursor.h"
-#include "console.h"
-#include "debug.h"
+#include "device/keyboard_map.h"
+#include "display/cursor.h"
+#include "display/console.h"
 #include "interrupt.h"
-#include "keyboard_map.h"
+#include "shared/debug.h"
 #include "shared/port.h"
 
 

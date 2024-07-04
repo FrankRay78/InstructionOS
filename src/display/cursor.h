@@ -1,6 +1,6 @@
 #pragma once
 
-#include "shared/types.h"
+#include "../shared/types.h"
 
 
 // Factory to create cursor

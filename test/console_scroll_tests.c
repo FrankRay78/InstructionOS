@@ -1,5 +1,5 @@
 #include "console_scroll_tests.h"
-#include "../src/console.h"
+#include "../src/display/console.h"
 #include "cursor_mock.h"
 
 MunitResult console_should_scroll_one_line_test(const MunitParameter params[], void* user_data_or_fixture)

@@ -1,5 +1,5 @@
 #include "console_HelloWorld_tests.h"
-#include "../src/console.h"
+#include "../src/display/console.h"
 #include "cursor_mock.h"
 
 MunitResult console_should_write_hello_world_with_printstring_statement_test(const MunitParameter params[], void* user_data_or_fixture)

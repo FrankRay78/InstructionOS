@@ -1,7 +1,7 @@
 #include "device/keyboard_map.h"
 #include "display/cursor.h"
 #include "display/console.h"
-#include "interrupt.h"
+#include "interrupt/interrupt.h"
 #include "shared/debug.h"
 #include "shared/port.h"
 

@@ -1,5 +1,5 @@
 #include "console_tests.h"
-#include "../src/display/console.h"
+#include "../../src/display/console.h"
 #include "cursor_mock.h"
 
 

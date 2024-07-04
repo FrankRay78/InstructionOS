@@ -1,5 +1,5 @@
 #include "console_cursor_tests.h"
-#include "../src/display/console.h"
+#include "../../src/display/console.h"
 #include "cursor_mock.h"
 
 MunitResult console_cursor_should_initialise_to_zero_test(const MunitParameter params[], void* user_data_or_fixture)

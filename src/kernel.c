@@ -1,9 +1,9 @@
-#include "cursor.h"
-#include "console.h"
-#include "debug.h"
-#include "interrupt.h"
-#include "keyboard_map.h"
-#include "port.h"
+#include "device/keyboard_map.h"
+#include "display/cursor.h"
+#include "display/console.h"
+#include "interrupt/interrupt.h"
+#include "shared/debug.h"
+#include "shared/port.h"
 
 
 // On x86 32-bit, all parameters should be passed through the stack

@@ -1,16 +1,21 @@
+SHELL := /bin/bash
+
 
 # Make implicit variables for compilation
-HEADERS   = $(wildcard *.h)
-C_SOURCES = $(wildcard *.c)
+HEADERS   = $(shell find . -name "*.h")
+C_SOURCES = $(shell find . -name "*.c")
 OBJ=${C_SOURCES:.c=.o}
 
-ASM_SOURCES = $(wildcard *.s)
-ASM_OBJ =${ASM_SOURCES:.s=.o}
+# Dynamically determine include directories for NASM
+ASM_INCLUDE=$(shell find . -name "*.s" -exec dirname {} \; | sort -u | sed 's/^/-I /')
+ASM_SOURCES=$(shell find . -name "*.s")
+ASM_OBJ=${ASM_SOURCES:.s=.o}
 
-CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
+CC_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 CC=i686-elf-gcc
 
-LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
+LD_TEMPLATE= -T $(shell find . -name "linkertemplate.ld")
+LD_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 LD=i686-elf-gcc
 
 
@@ -26,17 +31,17 @@ run: build
 build: kernel.bin
 
 kernel.bin: $(ASM_OBJ) $(OBJ)
-	$(LD) -T linkertemplate.ld -o kernel.bin $(ASM_OBJ) $(OBJ) $(LD_FLAGS)
+	$(LD) $(LD_TEMPLATE) -o kernel.bin $(ASM_OBJ) $(OBJ) $(LD_FLAGS)
 
 %.o: %.s
-	nasm -f elf32 $< -o $@
+	nasm -f elf32 $(ASM_INCLUDE) $< -o $@
 
 %.o : %.c ${HEADERS}
 	$(CC) -c $< -o $@ $(CC_FLAGS)
 
 
 clean:
-	rm -fd *.o
-	rm -fd *.bin
+	find . -name "*.o" -type f -delete
+	find . -name "*.bin" -type f -delete
 
 .PHONY: clean

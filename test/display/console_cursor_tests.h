@@ -1,5 +1,5 @@
 #pragma once
 
-#include "munit.h"
+#include "../munit.h"
 
 extern MunitTest console_cursor_tests[];

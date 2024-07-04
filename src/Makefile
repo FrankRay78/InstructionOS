@@ -7,10 +7,10 @@ OBJ=${C_SOURCES:.c=.o}
 ASM_SOURCES = $(wildcard *.s)
 ASM_OBJ =${ASM_SOURCES:.s=.o}
 
-CC_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
+CC_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 CC=i686-elf-gcc
 
-LD_FLAGS= -ffreestanding -O2 -nostdlib -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
+LD_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
 LD=i686-elf-gcc
 
 

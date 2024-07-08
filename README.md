@@ -25,7 +25,9 @@ InstructionOS isn't a fully-fledged 'operating system' yet, but it does boot and
 
 InstructionOS is developed on Ubuntu running in VMWare workstation.
 
-The following tools are required: gcc, nasm, make, QEMU (qemu-system-i386), C cross-compiler (i686-elf-gcc), hand-built using instructions from [here](https://wiki.osdev.org/GCC_Cross-Compiler).
+A C cross-compiler is required (i686-elf-gcc), instructions for hand-building this are [here](https://wiki.osdev.org/GCC_Cross-Compiler).
+
+Additional tools must also be installed: `apt install build-essential nasm qemu-system-i386`
 
 `make` will boot the kernel in QEMU, having first built it using the C freestanding toolchain.
 

@@ -31,7 +31,7 @@ Additional tools must also be installed: `apt install build-essential nasm qemu-
 
 `make` will boot the kernel in QEMU, having first built it using the C freestanding toolchain.
 
-`make test` will run the unit tests, having first built the kernel and unit tests using the standard C99 toolchain.
+`make test` will run the unit tests, having first built the kernel and unit tests using the standard C11 toolchain.
 
 `make clean` should be run before switching between these two commands, otherwise you'll get a linker failure (given the differing toolchains).
 

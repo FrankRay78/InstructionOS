@@ -25,7 +25,7 @@ InstructionOS isn't a fully-fledged 'operating system' yet, but it does boot and
 
 InstructionOS is developed on Ubuntu running in VMWare workstation.
 
-A C cross-compiler is required (i686-elf-gcc); my [bash script](https://github.com/FrankRay78/InstructionOS/blob/i686-elf-gcc/i686-elf-gcc-build.sh) will build this for you, instructions for doing it manually are [here](https://wiki.osdev.org/GCC_Cross-Compiler).
+A C cross-compiler is required (i686-elf-gcc); my [bash script](https://github.com/FrankRay78/InstructionOS/blob/main/i686-elf-gcc-build.sh) will build this for you, instructions for doing it manually are [here](https://wiki.osdev.org/GCC_Cross-Compiler).
 
 Additional tools must also be installed: `apt install build-essential nasm qemu-system-i386`
 

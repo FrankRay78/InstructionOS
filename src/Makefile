@@ -12,11 +12,11 @@ ASM_SOURCES=$(shell find . -name "*.s")
 ASM_OBJ=${ASM_SOURCES:.s=.o}
 
 CC_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
-CC=i686-elf-gcc
+CC=~/opt/cross/bin/i686-elf-gcc
 
 LD_TEMPLATE= -T $(shell find . -name "linkertemplate.ld")
 LD_FLAGS= -std=gnu11 -ffreestanding -nostdlib -O2 -lgcc -Wall -Wextra -Werror -g -Wno-unused-parameter
-LD=i686-elf-gcc
+LD=~/opt/cross/bin/i686-elf-gcc
 
 
 #
